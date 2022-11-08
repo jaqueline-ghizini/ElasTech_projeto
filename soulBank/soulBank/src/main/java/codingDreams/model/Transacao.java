@@ -4,12 +4,13 @@ public class Transacao {
 
     private int idTransacao;
     private double valor;
-    private ContaBancaria contaBancaria;
+    private ContaBancaria contaOrigem, contaDestino; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
 
-    public Transacao(int idTransacao, double valor, ContaBancaria contaBancaria) {
+    public Transacao(int idTransacao, double valor, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
         this.idTransacao = idTransacao;
         this.valor = valor;
-        this.contaBancaria = contaBancaria;
+        this.contaOrigem = contaOrigem;
+        this.contaDestino = contaDestino;
     }
 
     public int getIdTransacao() {
@@ -28,18 +29,25 @@ public class Transacao {
         this.valor = valor;
     }
 
-    public ContaBancaria getContaBancaria() {
-        return contaBancaria;
+    public ContaBancaria getContaOrigem() {
+        return contaOrigem;
     }
 
-    public void setContaBancaria(ContaBancaria contaBancaria) {
-        this.contaBancaria = contaBancaria;
+    public void setContaOrigem(ContaBancaria contaOrigem) {
+        this.contaOrigem = contaOrigem;
+    }
+    public ContaBancaria getContaDestino() {
+        return contaDestino;
+    }
+
+    public void setContaDestino(ContaBancaria contaDestino) {
+        this.contaDestino = contaDestino;
     }
 
 
     @Override
     public String toString() {
-		return this.idTransacao + "/" + this.valor + "/" + contaBancaria.toString();
+		return this.idTransacao + "/" + this.valor + "/" + contaOrigem.toString()+"/" + contaDestino.toString();
 
     }
 
@@ -55,9 +63,9 @@ public class Transacao {
 
     }
 
-    public String consultarHistorico(){
-        return this.toString(); //puxar e exibir todos os registros de transações do banco
-    }
+    //public String consultarHistorico(){
+       // return this.toString(); //puxar e exibir todos os registros de transações do banco
+  //  }
 
 
 }

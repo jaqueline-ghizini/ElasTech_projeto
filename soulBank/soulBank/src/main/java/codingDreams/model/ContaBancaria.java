@@ -6,7 +6,7 @@ public class ContaBancaria {
     private String agencia;
     private double saldo;
     private double limite;
-
+// private list <transacao> historicoDeTransacao;
     public ContaBancaria(String conta, String agencia, double saldo, double limite) {
         this.conta = conta;
         this.agencia = agencia;

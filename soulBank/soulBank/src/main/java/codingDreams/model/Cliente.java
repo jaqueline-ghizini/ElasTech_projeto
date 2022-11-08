@@ -1,16 +1,27 @@
-package codingDreams;
+package codingDreams.model;
 
 public class Cliente {
-    protected int idCliente; //ver com camila sobre ser maiusculo, ou se o i fica minusculo
+    protected int idCliente; 
     protected String email;
     protected String telefone;
-    //protected int idEndereco; //ver com camila
+    protected Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
+    protected ContaBancaria contaBancaria;
 
-    public Cliente(int idCliente, String email, String telefone) {
+    public Cliente(int idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
         super();
         this.idCliente = idCliente;
         this.email = email;
         this.telefone = telefone;
+        this.endereco = endereco;
+        this.contaBancaria = contaBancaria;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public int getIdCliente() {
@@ -37,9 +48,9 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String consultarCliente(Endereco endereco){
-        return idCliente + "/" + email + "/" + telefone + "/" + endereco.getEnderecoCompleto() +", " + endereco.getComplemento() +", "+ endereco.getBairro()+", "+endereco.getCidade()+ ", "+ endereco.getEstado()+", "+ endereco.getCep();
-    } //importa a classe endereco
+    public String consultarCliente(){
+        return idCliente + "/" + email + "/" + telefone + "/" + endereco.toString()+ "/" + contaBancaria.toString();
+    } 
 
     public void cadastrarCliente(){
 

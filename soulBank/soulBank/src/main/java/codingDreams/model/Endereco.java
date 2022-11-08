@@ -1,7 +1,7 @@
-package codingDreams;
+package codingDreams.model;
 
 public class Endereco {
-    private int idEndereco; //só get pq vai ser só pra consulta, checar com a cami, ver sobre os ids
+    private int idEndereco; //só get pq vai ser só pra consulta
     private String enderecoCompleto;
     private String complemento;
     private String bairro;
@@ -23,9 +23,9 @@ public class Endereco {
         return idEndereco;
     }
 
-    public void setIdEndereco(int idEndereco) {
-        this.idEndereco = idEndereco;
-    }
+    //public void setIdEndereco(int idEndereco) {
+    //    this.idEndereco = idEndereco;
+    //}
 
     public String getEnderecoCompleto() {
         return enderecoCompleto;
@@ -73,5 +73,10 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    @Override
+	public String toString() {
+		return this.enderecoCompleto + "," + this.complemento + "," + this.bairro + "," + this.cidade + "," + this.estado + "," + this.cep;
     }
 }

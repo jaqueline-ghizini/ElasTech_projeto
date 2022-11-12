@@ -19,6 +19,7 @@ public class PessoaFisicaController {
         System.out.println(pessoaFisica.getNome());
         System.out.println(pessoaFisica.getTelefone());
         System.out.println(pessoaFisica.getEndereco().getLogradouro());
+        System.out.println(pessoaFisica.getContaBancaria().getSaldo());
         return "Cadastro Realizado";
     }
     @PutMapping

@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-
+@RequestMapping("/contabancaria") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
+//tivemos um problema com a porta padrão e setamos uma nova porta no application.properties
 public class ContaBancariaController {
     //private String mensagem;
-        @GetMapping("/consultarConta/{conta}")
+        @GetMapping("/consultarconta/{conta}")
         public ContaBancaria realizarConsultaConta(@PathVariable String conta){
             System.out.println("Conta a ser localizada: "+conta);
 
@@ -25,7 +26,7 @@ public class ContaBancariaController {
         //  A conta só é inativada juntamente com o cliente.
         @PutMapping
         public String realizarAlteracaoConta(@RequestBody ContaBancaria contaBancaria){
-            return "Conta inativada com sucesso";
+            return "Conta alterada com sucesso";
         }
 
 }

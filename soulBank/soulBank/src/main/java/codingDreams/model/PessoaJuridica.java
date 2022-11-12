@@ -2,7 +2,7 @@ package codingDreams.model;
 
 public class PessoaJuridica extends Cliente {
     private String cnpj;
-    private String RazaoSocial;
+    private String razaoSocial;
 
     public PessoaJuridica(){
         //construtor vazio pra teste, ao criar objeto utilizar set
@@ -10,7 +10,7 @@ public class PessoaJuridica extends Cliente {
     public PessoaJuridica(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria, String cnpj, String razaoSocial) {
         super(idCliente, email, telefone, endereco, contaBancaria);
         this.cnpj = cnpj;
-        RazaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial;
     }
 
     public String getCnpj() {
@@ -22,14 +22,14 @@ public class PessoaJuridica extends Cliente {
     }
 
     public String getRazaoSocial() {
-        return RazaoSocial;
+        return razaoSocial;
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        RazaoSocial = razaoSocial;
+        razaoSocial = razaoSocial;
     }
 
     public String consultarCliente(){ //ver como botar endereço nas pessoas
-        return super.idCliente+"/"+super.email+"/"+super.telefone+"/"+super.endereco.toString()+"/"+super.contaBancaria.toString()+"/"+this.cnpj+"/"+this.RazaoSocial;
+        return super.idCliente+"/"+super.email+"/"+super.telefone+"/"+super.endereco.toString()+"/"+super.contaBancaria.toString()+"/"+this.cnpj+"/"+this.razaoSocial;
     }
 }

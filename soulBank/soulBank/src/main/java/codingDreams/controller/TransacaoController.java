@@ -5,14 +5,15 @@ import codingDreams.model.Transacao;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/transacao") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
 public class TransacaoController {
     //private String mensagem;
-    @GetMapping("/consultarHistorico")
+    @GetMapping("/consultarhistorico")
     public String realizarConsultaHistoricoTransacao(){
         return "Consulta de historico Realizada"; // Consulta geral
     }
 
-    @GetMapping("/consultarTransacao/{idTransacao}")
+    @GetMapping("/consultartransacao/{idTransacao}")
     public Transacao realizarConsultaTransacao(@PathVariable Long idTransacao){
         System.out.println("Id da Transação a ser localizada: "+idTransacao);
 

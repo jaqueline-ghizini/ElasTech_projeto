@@ -10,7 +10,20 @@ public class TransacaoService {
     public void realizarConsultaTransacao(){
 
     }
-    public void registrarTransacao(){
+    public void realizarDeposito(){
         
     }
+
+    public void realizarSaque(){
+
+    }
+
+    public void realizarTransferencia(){
+
+    }
+
+    public void realizarTransferenciaPix(){
+
+    }
+
 }

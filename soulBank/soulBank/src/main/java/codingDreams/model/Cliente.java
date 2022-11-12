@@ -1,13 +1,20 @@
 package codingDreams.model;
 
 public class Cliente {
-    protected int idCliente; 
+    //@Id
+    //@GeneratedValue
+    protected Long idCliente;
     protected String email;
     protected String telefone;
+
+    //@Embedded
     protected Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
     protected ContaBancaria contaBancaria;
 
-    public Cliente(int idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
+    public Cliente(){
+        //construtor vazio pra teste, ao criar objeto utilizar set
+    }
+    public Cliente(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
         super();
         this.idCliente = idCliente;
         this.email = email;
@@ -16,19 +23,11 @@ public class Cliente {
         this.contaBancaria = contaBancaria;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public int getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -46,6 +45,22 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ContaBancaria getContaBancaria() {
+        return contaBancaria;
+    }
+
+    public void setContaBancaria(ContaBancaria contaBancaria) {
+        this.contaBancaria = contaBancaria;
     }
 
     public String consultarCliente(){

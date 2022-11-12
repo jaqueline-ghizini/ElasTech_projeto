@@ -1,17 +1,23 @@
 package codingDreams.model;
 
+
+//@Embeddable
+
 public class Endereco {
-    private int idEndereco; //só get pq vai ser só pra consulta
-    private String enderecoCompleto;
+
+    //@Id
+    //@GeneratedValue
+    private Long idEndereco; //só get pq vai ser só pra consulta
+    private String logradouro;
     private String complemento;
     private String bairro;
     private String cidade;
     private String estado;
     private String cep;
 
-    public Endereco(int idEndereco, String enderecoCompleto, String complemento, String bairro, String cidade, String estado, String cep) {
+    public Endereco(Long idEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep) {
         this.idEndereco = idEndereco;
-        this.enderecoCompleto = enderecoCompleto;
+        this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -19,20 +25,20 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public int getIdEndereco() {
+    public Long getIdEndereco() {
         return idEndereco;
     }
 
-    //public void setIdEndereco(int idEndereco) {
+    //public void setIdEndereco(Long idEndereco) {
     //    this.idEndereco = idEndereco;
     //}
 
-    public String getEnderecoCompleto() {
-        return enderecoCompleto;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEnderecoCompleto(String enderecoCompleto) {
-        this.enderecoCompleto = enderecoCompleto;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getComplemento() {
@@ -77,6 +83,6 @@ public class Endereco {
 
     @Override
 	public String toString() {
-		return this.enderecoCompleto + "," + this.complemento + "," + this.bairro + "," + this.cidade + "," + this.estado + "," + this.cep;
+		return this.logradouro + "," + this.complemento + "," + this.bairro + "," + this.cidade + "," + this.estado + "," + this.cep;
     }
 }

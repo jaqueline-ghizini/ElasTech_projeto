@@ -1,6 +1,13 @@
 package codingDreams.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class PessoaJuridica extends Cliente {
+
+    @Id
     private String cnpj;
     private String razaoSocial;
 

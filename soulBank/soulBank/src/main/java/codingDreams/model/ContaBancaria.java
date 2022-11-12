@@ -1,6 +1,13 @@
 package codingDreams.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class ContaBancaria {
+
+    @Id
     private String conta;
     private String agencia;
     private double saldo;

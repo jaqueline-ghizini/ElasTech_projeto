@@ -1,11 +1,17 @@
 package codingDreams.model;
 
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 //@Embeddable
+@Entity
 
 public class Endereco {
 
-    //@Id
+    @Id
     //@GeneratedValue
     private Long idEndereco; //só get pq vai ser só pra consulta
     private String logradouro;

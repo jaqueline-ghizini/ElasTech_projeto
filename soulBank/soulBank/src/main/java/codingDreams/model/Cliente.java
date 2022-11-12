@@ -1,8 +1,14 @@
 package codingDreams.model;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Cliente {
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     protected Long idCliente;
     protected String email;
     protected String telefone;

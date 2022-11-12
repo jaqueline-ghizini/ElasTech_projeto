@@ -26,7 +26,7 @@ public class PessoaJuridica extends Cliente {
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        razaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial;
     }
 
     public String consultarCliente(){ //ver como botar endereço nas pessoas

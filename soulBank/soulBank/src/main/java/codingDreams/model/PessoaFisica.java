@@ -5,6 +5,9 @@ public class PessoaFisica extends Cliente{
     private String rg;
     private String nome;
 
+    public PessoaFisica(){
+        //construtor vazio pra teste, ao criar objeto utilizar set
+    }
     public PessoaFisica(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria, String cpf, String rg, String nome) {
         super(idCliente, email, telefone, endereco, contaBancaria);
         this.cpf = cpf;

@@ -1,5 +1,6 @@
 package codingDreams.controller;
 
+import codingDreams.model.ContaBancaria;
 import codingDreams.model.PessoaFisica;
 import codingDreams.model.PessoaJuridica;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +10,17 @@ public class PessoaJuridicaController {
     
     //private String mensagem;
     @GetMapping("/consultarPj/{cnpj}")
-    public String realizarConsultaPJ(@PathVariable String cnpj ){
+    public PessoaJuridica realizarConsultaPJ(@PathVariable String cnpj ){
         System.out.println("CNPJ do cliente a ser localizado: " +cnpj);
-        return "Cnpj pesquisado: "+cnpj;
+
+        ContaBancaria conta = new ContaBancaria();
+        conta.setConta("1");
+        PessoaJuridica pj = new PessoaJuridica();
+        pj.setCnpj(cnpj);
+        pj.setRazaoSocial("razao social");
+        pj.setContaBancaria(conta);
+
+        return pj;
     }
 
     @PostMapping

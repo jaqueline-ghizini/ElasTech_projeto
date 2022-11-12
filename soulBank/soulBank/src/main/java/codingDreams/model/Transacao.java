@@ -6,6 +6,9 @@ public class Transacao {
     private double valor;
     private ContaBancaria contaOrigem, contaDestino; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
 
+    public Transacao(){
+        //construtor vazio pra teste, ao criar objeto utilizar set
+    }
     public Transacao(Long idTransacao, double valor, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
         this.idTransacao = idTransacao;
         this.valor = valor;

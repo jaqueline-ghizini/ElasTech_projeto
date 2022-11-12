@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.*;
 public class ContaBancariaController {
     //private String mensagem;
         @GetMapping("/consultarConta/{conta}")
-        public String realizarConsultaConta(@PathVariable String conta){
+        public ContaBancaria realizarConsultaConta(@PathVariable String conta){
             System.out.println("Conta a ser localizada: "+conta);
-            return "Numero da conta: "+conta;
+
+            ContaBancaria contBank = new ContaBancaria();
+            contBank.setConta(conta);
+            contBank.setSaldo(200.00);
+
+            return contBank;
         }
 
         //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.

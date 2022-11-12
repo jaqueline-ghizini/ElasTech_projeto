@@ -13,9 +13,14 @@ public class TransacaoController {
     }
 
     @GetMapping("/consultarTransacao/{idTransacao}")
-    public String realizarConsultaTransacao(@PathVariable Long idTransacao){
+    public Transacao realizarConsultaTransacao(@PathVariable Long idTransacao){
         System.out.println("Id da Transação a ser localizada: "+idTransacao);
-        return "Id da transação: "+idTransacao;// Consulta especifica
+
+        Transacao transacao = new Transacao();
+        transacao.setIdTransacao(idTransacao);
+        transacao.setValor(100.00);
+
+        return transacao;// Consulta especifica
     }
 
     @PostMapping("/depositar")

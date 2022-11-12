@@ -9,6 +9,15 @@ public class ContaBancariaService {
     }
     
     public void realizarAlteracaoConta(){
+        //fazer alteração conta
 
+        //1 para especial e 0 para normal
+        boolean tipoConta = false;
+
+        if(tipoConta){
+
+        }else{
+
+        }
     }
 }

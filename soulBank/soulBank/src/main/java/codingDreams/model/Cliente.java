@@ -11,6 +11,9 @@ public class Cliente {
     protected Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
     protected ContaBancaria contaBancaria;
 
+    public Cliente(){
+        //construtor vazio pra teste, ao criar objeto utilizar set
+    }
     public Cliente(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
         super();
         this.idCliente = idCliente;

@@ -9,6 +9,10 @@ public class ContaBancaria {
     private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
 
 // private list <transacao> historicoDeTransacao;
+
+    public ContaBancaria(){
+        //construtor vazio pra teste, ao criar objeto utilizar set
+    }
     public ContaBancaria(String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix) {
         this.conta = conta;
         this.agencia = agencia;

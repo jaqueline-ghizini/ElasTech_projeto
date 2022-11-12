@@ -1,13 +1,17 @@
 package codingDreams.model;
 
 public class Cliente {
-    protected int idCliente; 
+    //@Id
+    //@GeneratedValue
+    protected Long idCliente;
     protected String email;
     protected String telefone;
+
+    //@Embedded
     protected Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
     protected ContaBancaria contaBancaria;
 
-    public Cliente(int idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
+    public Cliente(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
         super();
         this.idCliente = idCliente;
         this.email = email;
@@ -24,11 +28,11 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public int getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 

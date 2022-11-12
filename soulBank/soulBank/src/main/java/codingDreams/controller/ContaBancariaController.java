@@ -1,26 +1,26 @@
 package codingDreams.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import codingDreams.model.ContaBancaria;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 
 public class ContaBancariaController {
     //private String mensagem;
-        @GetMapping("/ ")
-        public String realizarConsultaConta(){
-            return "Consulta Realizada";
-
+        @GetMapping("/consultarConta/{conta}")
+        public String realizarConsultaConta(@PathVariable String conta){
+            System.out.println("Conta a ser localizada: "+conta);
+            return "Numero da conta: "+conta;
         }
-        @PutMapping()
-        public String realizarAlteracaoConta(){
+
+        //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.
+        //  Também tem SoftDelete, ou seja os dados não serão perdidos.
+        //  A conta pode ser alterada entre comum e especial.
+        //  A conta só é inativada juntamente com o cliente.
+        @PutMapping
+        public String realizarAlteracaoConta(@RequestBody ContaBancaria contaBancaria){
             return "Conta inativada com sucesso";
         }
-
-    
-  
-
 
 }

@@ -5,10 +5,10 @@ import codingDreams.model.PessoaFisica;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-
+@RequestMapping("/pessoafisica") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
 public class PessoaFisicaController {
     //private String mensagem;
-    @GetMapping("/consultaPf/{cpf}")
+    @GetMapping("/consultapf/{cpf}")
     public PessoaFisica realizarConsultaPF(@PathVariable String cpf){
         System.out.println("CPF do cliente a ser localizado: " +cpf);
 

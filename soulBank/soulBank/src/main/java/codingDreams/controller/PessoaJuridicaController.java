@@ -6,10 +6,11 @@ import codingDreams.model.PessoaJuridica;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/pessoajuridica") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
 public class PessoaJuridicaController {
     
     //private String mensagem;
-    @GetMapping("/consultarPj/{cnpj}")
+    @GetMapping("/consultarpj/{cnpj}")
     public PessoaJuridica realizarConsultaPJ(@PathVariable String cnpj ){
         System.out.println("CNPJ do cliente a ser localizado: " +cnpj);
 
@@ -29,6 +30,7 @@ public class PessoaJuridicaController {
         System.out.println(pessoaJuridica.getRazaoSocial());
         System.out.println(pessoaJuridica.getTelefone());
         System.out.println(pessoaJuridica.getEndereco().getLogradouro());
+        System.out.println(pessoaJuridica.getContaBancaria().getSaldo());
         return "Cadastro Realizado";
     }
 

@@ -1,11 +1,8 @@
 package codingDreams.model;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 public class Cliente {
     @Id
     @GeneratedValue
@@ -13,8 +10,10 @@ public class Cliente {
     protected String email;
     protected String telefone;
 
-    //@Embedded
+    @OneToOne
     protected Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
+
+    @OneToOne
     protected ContaBancaria contaBancaria;
 
     public Cliente(){

@@ -1,27 +1,32 @@
 package codingDreams.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 
-public class Transacao {
+public class Transacao implements Serializable {
 
     @Id
     @GeneratedValue
     private Long idTransacao;
     private double valor;
+    private int tipoTransacao;
+
+
+    @ManyToOne @JoinColumn(name="idConta")
     private ContaBancaria contaOrigem, contaDestino; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
 
     public Transacao(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public Transacao(Long idTransacao, double valor, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
+    public Transacao(Long idTransacao, double valor, int tipoTransacao, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
         this.idTransacao = idTransacao;
         this.valor = valor;
+        this.tipoTransacao = tipoTransacao;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
+
     }
 
     public Long getIdTransacao() {
@@ -38,6 +43,14 @@ public class Transacao {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public int getTipoTransacao() {
+        return tipoTransacao;
+    }
+
+    public void setTipoTransacao(int tipoTransacao) {
+        this.tipoTransacao = tipoTransacao;
     }
 
     public ContaBancaria getContaOrigem() {
@@ -59,7 +72,7 @@ public class Transacao {
 
     @Override
     public String toString() {
-		return this.idTransacao + "/" + this.valor + "/" + contaOrigem.toString()+"/" + contaDestino.toString();
+		return this.idTransacao + "/" + this.valor + "/"  + this.tipoTransacao + "/" + contaOrigem.toString()+"/" + contaDestino.toString();
 
     }
 
@@ -74,10 +87,5 @@ public class Transacao {
     public void realizarSaque(){
 
     }
-
-    //public String consultarHistorico(){
-       // return this.toString(); //puxar e exibir todos os registros de transações do banco
-  //  }
-
 
 }

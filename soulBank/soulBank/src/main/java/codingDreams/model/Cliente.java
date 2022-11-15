@@ -19,6 +19,8 @@ public class Cliente {
     public Cliente(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
+
+    //Inicialmente nós desclaramos o constructor, os gets e os sets, e posteriormente vimos que era possível fazer utilizando as anotações: @Getter,  @Setter e @NoArgsConstructor
     public Cliente(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria) {
         super();
         this.idCliente = idCliente;

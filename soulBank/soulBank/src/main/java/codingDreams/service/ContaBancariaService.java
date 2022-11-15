@@ -1,14 +1,22 @@
 package codingDreams.service;
 
+import codingDreams.model.ContaBancaria;
+import codingDreams.repository.ContaBancariaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class ContaBancariaService {
-    public void realizarConsultaConta(){
+    @Autowired
+    private ContaBancariaRepository cr;
 
+    public Optional<ContaBancaria> realizarConsultaConta(Long idConta) {
+        return cr.findById(idConta);
     }
-    
-    public void realizarAlteracaoConta(){
+
+    public ContaBancaria realizarAlteracaoConta(ContaBancaria contaBancaria) {
         //fazer alteração conta
 
         //1 para especial e 0 para normal
@@ -19,5 +27,6 @@ public class ContaBancariaService {
         }else{
 
         }
+        return cr.save(contaBancaria);
     }
 }

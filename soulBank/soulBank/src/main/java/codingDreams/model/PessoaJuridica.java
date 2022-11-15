@@ -1,6 +1,13 @@
 package codingDreams.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class PessoaJuridica extends Cliente {
+
+    @Id
     private String cnpj;
     private String razaoSocial;
 
@@ -26,7 +33,7 @@ public class PessoaJuridica extends Cliente {
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        razaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial;
     }
 
     public String consultarCliente(){ //ver como botar endereço nas pessoas

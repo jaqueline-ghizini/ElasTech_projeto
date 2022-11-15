@@ -1,25 +1,49 @@
 package codingDreams.model;
 
-public class ContaBancaria {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+
+public class ContaBancaria implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long idConta;
+
     private String conta;
-    private String agencia;
+    private String agencia;//botar como id tbm
     private double saldo;
     private double limite;
     private boolean tipoConta; // se for tipo false, não é conta especial, então o limite é zero. Se for tipo true, é especial e tem limite
     private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
 
-// private list <transacao> historicoDeTransacao;
+    @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
+    private List <Transacao> historicoDeTransacao;//prof ficou de ver quarta
+
+
 
     public ContaBancaria(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public ContaBancaria(String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix) {
+    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix, List historicoDeTransacao) {
+        this.idConta = idConta;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
         this.limite = limite;
         this.tipoConta = tipoConta;
         this.chavePix = chavePix;
+        this.historicoDeTransacao = historicoDeTransacao;
+    }
+
+    public Long getIdConta() {
+        return idConta;
+    }
+
+    public void setIdConta(Long idConta) {
+        this.idConta = idConta;
     }
 
     public String getConta() {
@@ -70,15 +94,23 @@ public class ContaBancaria {
         this.chavePix = chavePix;
     }
 
+    public List<Transacao> getHistoricoDeTransacao() {
+        return historicoDeTransacao;
+    }
+
+    public void setHistoricoDeTransacao(List<Transacao> historicoDeTransacao) {
+        this.historicoDeTransacao = historicoDeTransacao;
+    }
+
     @Override
     public String toString() {
-		return this.conta + "/" + this.agencia + "/" + this.saldo + "/" + this.limite;
+		return this.conta + "/" + this.agencia + "/" + this.saldo + "/" + this.limite + "/" + this.chavePix;
     
     }
 
 
-    public String consultarConta() {
-        return this.toString(); //vamos falar com a Cami
+    public List<Transacao> consultarHistorico() { //checar cami
+        return this.historicoDeTransacao; //vamos falar com a Cami
     }
 
     public void cadastrarConta(){

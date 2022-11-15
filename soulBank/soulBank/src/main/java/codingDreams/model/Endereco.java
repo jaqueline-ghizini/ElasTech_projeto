@@ -1,12 +1,18 @@
 package codingDreams.model;
 
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 //@Embeddable
+@Entity
 
 public class Endereco {
 
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private Long idEndereco; //só get pq vai ser só pra consulta
     private String logradouro;
     private String complemento;
@@ -15,7 +21,7 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    public Endereco(Long idEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep) {
+    public Endereco(Long IdEndereço, String logradouro, String complemento, String bairro, String cidade, String estado, String cep) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.complemento = complemento;

@@ -1,6 +1,13 @@
 package codingDreams.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class PessoaFisica extends Cliente{
+
+    @Id
     private String cpf; //ver com a prof se fica automaticamente final
     private String rg;
     private String nome;

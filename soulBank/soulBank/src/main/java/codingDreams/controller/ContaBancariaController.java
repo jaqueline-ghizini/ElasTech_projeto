@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/contabancaria") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
 //tivemos um problema com a porta padrão e setamos uma nova porta no application.properties
 public class ContaBancariaController {
-    //private String mensagem;
+       //private String mensagem;
         @GetMapping("/consultarconta/{conta}")
         public ContaBancaria realizarConsultaConta(@PathVariable String conta){
             System.out.println("Conta a ser localizada: "+conta);

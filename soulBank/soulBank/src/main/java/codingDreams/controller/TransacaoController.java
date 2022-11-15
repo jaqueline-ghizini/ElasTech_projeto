@@ -26,7 +26,7 @@ public class TransacaoController {
 
     @PostMapping("/depositar")
     public String realizarDeposito(@RequestBody Transacao transacao){
-        return "Deposito Realizada";
+        return "Deposito Realizado";
     }
 
     @PostMapping("/sacar")
@@ -41,7 +41,7 @@ public class TransacaoController {
 
     @PostMapping("/pix")
     public String realizarTransferenciaPix(@RequestBody Transacao transacao){
-        return "Transferencia de Pix Realizada";
+        return "Pix Realizado";
     }
 
 }

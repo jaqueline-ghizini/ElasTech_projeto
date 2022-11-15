@@ -1,9 +1,6 @@
 package codingDreams.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +9,7 @@ import java.util.List;
 public class ContaBancaria implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long idConta;
 
     private String conta;

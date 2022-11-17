@@ -1,6 +1,7 @@
 package codingDreams.service;
 
 import codingDreams.model.ContaBancaria;
+import codingDreams.model.Endereco;
 import codingDreams.model.PessoaFisica;
 import codingDreams.repository.PessoaFisicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,19 @@ public class PessoaFisicaService {
     private PessoaFisicaRepository sr;
     @Autowired
     private ContaBancariaService cb;
+
+    //@Autowired
+    //private Endereco end;
     public Optional<PessoaFisica> realizarConsultaPF(String cpf) {
         return sr.findById(cpf);
     }
 
     public PessoaFisica cadastrarPF(PessoaFisica pessoaFisica) {//vamos realizar o cadastro do banco juntamente com o cadastro da pessoal,por isso criamos o metodo cadstrarConta e chamamos conta em pessoa
-        //PessoaFisica pf= sr.save(pessoaFisica);//ao cadastrar, pegar a alternativa do criente de qual dado usar (cpf/cnpj, telefone, email), e cadastrar no bando de dados esse dado
-        //ContaBancaria conta= cb.cadastrarConta(pf.getContaBancaria());//cofirmar como fazer associação com a camis
+        ContaBancaria conta= cb.cadastrarConta(pessoaFisica.getContaBancaria());//cofirmar como fazer associação com a camis
+        //pessoaFisica.setEndereco();
+       pessoaFisica.setContaBancaria(conta);
+        return sr.save(pessoaFisica);//ao cadastrar, pegar a alternativa do criente de qual dado usar (cpf/cnpj, telefone, email), e cadastrar no bando de dados esse dado
 
-
-        return sr.save(pessoaFisica);
     }
 
     public PessoaFisica realizarAlteracaoPF(PessoaFisica pessoaFisica) {

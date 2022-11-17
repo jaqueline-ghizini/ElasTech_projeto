@@ -53,6 +53,9 @@ public class Endereco {
         this.pessoaJuridica= pessoaJuridica;
 
     }
+    public Endereco(){
+
+    }
 
     public Long getIdEndereco() {
         return idEndereco;

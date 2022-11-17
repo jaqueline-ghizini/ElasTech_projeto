@@ -16,9 +16,11 @@ public class ContaBancaria  {
     private String agencia;//botar como id tbm
     private double saldo;
     private double limite;
-    private boolean tipoConta; // se for tipo false, não é conta especial, então o limite é zero. Se for tipo true, é especial e tem limite
+
+    private boolean chequeEspecial; // se for tipo false, não é conta especial, então o limite é zero. Se for tipo true, é especial e tem limite
     private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
 
+    private boolean statusConta;
     @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
     private List <Transacao> historicoOrigem;
 
@@ -30,16 +32,17 @@ public class ContaBancaria  {
     public ContaBancaria(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix, List historicoOrigem, List historicoDestino) {
+    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean chequeEspecial, String chavePix, List historicoOrigem, List historicoDestino, boolean statusConta) {
         this.idConta = idConta;
         this.conta = conta;
         this.agencia = agencia;
         this.saldo = saldo;
         this.limite = limite;
-        this.tipoConta = tipoConta;
+        this.chequeEspecial = chequeEspecial;
         this.chavePix = chavePix;
         this.historicoOrigem = historicoOrigem;
         this.historicoDestino= historicoDestino;
+        this.statusConta = statusConta;
     }
 
     public Long getIdConta() {
@@ -82,12 +85,12 @@ public class ContaBancaria  {
         this.limite = limite;
     }
 
-    public boolean isTipoConta() {
-        return tipoConta;
+    public boolean isChequeEspecial() {
+        return chequeEspecial;
     }
 
-    public void setTipoConta(boolean tipoConta) {
-        this.tipoConta = tipoConta;
+    public void setChequeEspecial(boolean chequeEspecial) {
+        this.chequeEspecial = chequeEspecial;
     }
 
     public String getChavePix() {
@@ -112,9 +115,17 @@ public class ContaBancaria  {
         this.historicoDestino = historicoDestino;
     }
 
+    public boolean isStatusConta() {
+        return statusConta;
+    }
+
+    public void setStatusConta(boolean statusConta) {
+        this.statusConta = statusConta;
+    }
+
     @Override
     public String toString() {
-		return this.conta + "/" + this.agencia + "/" + this.saldo + "/" + this.limite + "/" + this.chavePix;
+		return this.conta + "/" + this.agencia + "/" + this.saldo + "/" + this.limite + "/" + this.chequeEspecial + "/" + this.chavePix + "/" + this.statusConta;
     
     }
 

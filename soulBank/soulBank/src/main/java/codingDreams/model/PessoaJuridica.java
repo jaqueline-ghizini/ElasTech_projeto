@@ -32,8 +32,8 @@ public class PessoaJuridica extends Cliente {
         return Objects.hash(cnpj);
     }
 
-    public PessoaJuridica(String email, String telefone, String cnpj, String razaoSocial, Endereco endereco, ContaBancaria contaBancaria) {
-        super(email, telefone);
+    public PessoaJuridica(String email, String telefone, boolean statusCliente, String cnpj, String razaoSocial, Endereco endereco, ContaBancaria contaBancaria) {
+        super(email, telefone, statusCliente);
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.endereco=endereco;
@@ -73,6 +73,6 @@ public class PessoaJuridica extends Cliente {
     }
 
     public String consultarCliente(){ //ver como botar endereço nas pessoas
-        return super.email+"/"+super.telefone+"/"+this.cnpj+"/"+this.razaoSocial+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
+        return super.email+"/"+super.telefone+"/"+ super.statusCliente + "/" + this.cnpj+"/"+this.razaoSocial+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
     }
 }

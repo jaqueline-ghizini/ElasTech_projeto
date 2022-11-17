@@ -1,5 +1,6 @@
 package codingDreams.service;
 
+import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
 import codingDreams.repository.TransacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class TransacaoService {
         return sr.findAll();
     }
 
-    public Optional<Transacao> consultarTransacao(Long idTransacao) {
-        return sr.findById(idTransacao);
+    public Optional<Transacao> consultarTransacao(Long idTransacao) {return sr.findById(idTransacao);
     }
 
     public Transacao realizarDeposito(Transacao transacao) {
+
         return sr.save(transacao);
     }
 
@@ -32,6 +33,7 @@ public class TransacaoService {
     }
 
     public Transacao realizarTransferencia(Transacao transacao) {
+       
         return sr.save(transacao);
     }
 

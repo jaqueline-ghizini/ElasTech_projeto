@@ -36,8 +36,8 @@ public class PessoaFisica extends Cliente{
     public PessoaFisica(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public PessoaFisica(String email, String telefone,  String cpf, String rg, String nome, Endereco endereco,ContaBancaria contaBancaria) {
-        super(email,telefone);
+    public PessoaFisica(String email, String telefone, boolean statusCliente,  String cpf, String rg, String nome, Endereco endereco,ContaBancaria contaBancaria) {
+        super(email,telefone, statusCliente);
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
@@ -88,7 +88,7 @@ public class PessoaFisica extends Cliente{
     }
 
     public String consultarCliente(){
-        return super.email+"/"+super.telefone+"/"+this.cpf+"/"+this.rg+"/"+this.nome+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
+        return super.email+"/"+super.telefone+"/" + super.statusCliente + "/" +this.cpf+"/"+this.rg+"/"+this.nome+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
     }
 
 }

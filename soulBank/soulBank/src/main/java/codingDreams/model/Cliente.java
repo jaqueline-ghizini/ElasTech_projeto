@@ -3,10 +3,12 @@ package codingDreams.model;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class Cliente {
+public class Cliente {//possibilidade de implementação relação n:n cliente e conta bancaria
     // não geramos id por ser uma superClasse, e toda consulta será nas classes filhas(entidades)
     protected String email;
     protected String telefone;
+
+    protected boolean statusCliente;
 
 
 
@@ -15,11 +17,13 @@ public class Cliente {
     }
 
     //Inicialmente nós desclaramos o constructor, os gets e os sets, e posteriormente vimos que era possível fazer utilizando as anotações: @Getter,  @Setter e @NoArgsConstructor
-    public Cliente(String email, String telefone) {
+    public Cliente(String email, String telefone, boolean statusCliente) {
         super();
         //this.idCliente = idCliente;
         this.email = email;
         this.telefone = telefone;
+        this.statusCliente = statusCliente;
+
 
     }
 
@@ -47,9 +51,16 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public boolean isStatusCliente() {
+        return statusCliente;
+    }
+
+    public void setStatusCliente(boolean statusCliente) {
+        this.statusCliente = statusCliente;
+    }
 
     public String consultarCliente(){
-        return  email + "/" + telefone;
+        return  email + "/" + telefone + "/" + statusCliente;
     } 
 
 }

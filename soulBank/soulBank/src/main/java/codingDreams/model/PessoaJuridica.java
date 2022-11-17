@@ -1,7 +1,7 @@
 package codingDreams.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 
@@ -10,14 +10,34 @@ public class PessoaJuridica extends Cliente {
     @Id
     private String cnpj;
     private String razaoSocial;
+    @ManyToOne @JoinColumn(name="idEndereco")
+    private Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
+
+    @OneToOne
+    private ContaBancaria contaBancaria;
 
     public PessoaJuridica(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public PessoaJuridica(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria, String cnpj, String razaoSocial) {
-        super(idCliente, email, telefone, endereco, contaBancaria);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PessoaJuridica pessoaJuridica = (PessoaJuridica) o;
+        return Objects.equals(cnpj, pessoaJuridica.cnpj);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cnpj);
+    }
+
+    public PessoaJuridica(String email, String telefone, String cnpj, String razaoSocial, Endereco endereco, ContaBancaria contaBancaria) {
+        super(email, telefone);
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
+        this.endereco=endereco;
+        this.contaBancaria= contaBancaria;
     }
 
     public String getCnpj() {
@@ -36,7 +56,23 @@ public class PessoaJuridica extends Cliente {
         this.razaoSocial = razaoSocial;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ContaBancaria getContaBancaria() {
+        return contaBancaria;
+    }
+
+    public void setContaBancaria(ContaBancaria contaBancaria) {
+        this.contaBancaria = contaBancaria;
+    }
+
     public String consultarCliente(){ //ver como botar endereço nas pessoas
-        return super.idCliente+"/"+super.email+"/"+super.telefone+"/"+super.endereco.toString()+"/"+super.contaBancaria.toString()+"/"+this.cnpj+"/"+this.razaoSocial;
+        return super.email+"/"+super.telefone+"/"+this.cnpj+"/"+this.razaoSocial+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
     }
 }

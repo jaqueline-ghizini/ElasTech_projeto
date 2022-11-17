@@ -1,10 +1,9 @@
 package codingDreams.model;
 
 
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
 //@Embeddable
 @Entity
@@ -21,7 +20,28 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    public Endereco(Long IdEndereço, String logradouro, String complemento, String bairro, String cidade, String estado, String cep) {
+    @OneToMany(mappedBy="endereco", targetEntity=PessoaFisica.class)
+    private Collection pessoaFisica;
+
+    @OneToMany(mappedBy="endereco", targetEntity=PessoaJuridica.class)
+    private Collection pessoaJuridica;
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco= (Endereco) o;
+        return Objects.equals(idEndereco, endereco.idEndereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEndereco);
+    }
+
+    public Endereco(Long IdEndereço, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.complemento = complemento;
@@ -29,15 +49,18 @@ public class Endereco {
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
+        this.pessoaFisica=pessoaFisica;
+        this.pessoaJuridica= pessoaJuridica;
+
     }
 
     public Long getIdEndereco() {
         return idEndereco;
     }
 
-    //public void setIdEndereco(Long idEndereco) {
-    //    this.idEndereco = idEndereco;
-    //}
+    public void setIdEndereco(Long idEndereco) {
+       this.idEndereco = idEndereco;
+    }
 
     public String getLogradouro() {
         return logradouro;
@@ -85,6 +108,22 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public Collection getPessoaFisica() {
+        return pessoaFisica;
+    }
+
+    public void setPessoaFisica(Collection pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
+    }
+
+    public Collection getPessoaJuridica() {
+        return pessoaJuridica;
+    }
+
+    public void setPessoaJuridica(Collection pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
     }
 
     @Override

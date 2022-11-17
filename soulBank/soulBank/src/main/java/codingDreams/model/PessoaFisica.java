@@ -1,7 +1,7 @@
 package codingDreams.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 
@@ -11,15 +11,38 @@ public class PessoaFisica extends Cliente{
     private String cpf; //ver com a prof se fica automaticamente final
     private String rg;
     private String nome;
+    @ManyToOne @JoinColumn(name="idEndereco")
+    private Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
+
+
+    @OneToOne
+    private ContaBancaria contaBancaria;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PessoaFisica pessoaFisica = (PessoaFisica) o;
+        return Objects.equals(cpf, pessoaFisica.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf);
+    }
+
+
+
 
     public PessoaFisica(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public PessoaFisica(Long idCliente, String email, String telefone, Endereco endereco, ContaBancaria contaBancaria, String cpf, String rg, String nome) {
-        super(idCliente, email, telefone, endereco, contaBancaria);
+    public PessoaFisica(String email, String telefone,  String cpf, String rg, String nome, Endereco endereco,ContaBancaria contaBancaria) {
+        super(email,telefone);
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
+        this.endereco= endereco;
+        this.contaBancaria=contaBancaria;
     }
 
     public String getCpf() {
@@ -46,7 +69,26 @@ public class PessoaFisica extends Cliente{
         this.nome = nome;
     }
 
-    public String consultarCliente(){
-        return super.idCliente+"/"+super.email+"/"+super.telefone+"/"+super.endereco.toString()+"/"+super.contaBancaria.toString()+"/"+this.cpf+"/"+this.rg+"/"+this.nome;
+
+    public Endereco getEndereco() {
+        return endereco;
     }
+
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ContaBancaria getContaBancaria() {
+        return contaBancaria;
+    }
+
+    public void setContaBancaria(ContaBancaria contaBancaria) {
+        this.contaBancaria = contaBancaria;
+    }
+
+    public String consultarCliente(){
+        return super.email+"/"+super.telefone+"/"+this.cpf+"/"+this.rg+"/"+this.nome+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
+    }
+
 }

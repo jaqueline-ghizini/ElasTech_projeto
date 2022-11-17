@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 
-public class ContaBancaria implements Serializable {
+public class ContaBancaria  {
 
     @Id
     @GeneratedValue
@@ -20,14 +20,17 @@ public class ContaBancaria implements Serializable {
     private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
 
     @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
-    private List <Transacao> historicoDeTransacao;//prof ficou de ver quarta
+    private List <Transacao> historicoOrigem;
+
+    @OneToMany (mappedBy="contaDestino", targetEntity=Transacao.class)
+    private List <Transacao> historicoDestino;// explicar pq não utlizamos ManyToMany
 
 
 
     public ContaBancaria(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix, List historicoDeTransacao) {
+    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean tipoConta, String chavePix, List historicoOrigem, List historicoDestino) {
         this.idConta = idConta;
         this.conta = conta;
         this.agencia = agencia;
@@ -35,7 +38,8 @@ public class ContaBancaria implements Serializable {
         this.limite = limite;
         this.tipoConta = tipoConta;
         this.chavePix = chavePix;
-        this.historicoDeTransacao = historicoDeTransacao;
+        this.historicoOrigem = historicoOrigem;
+        this.historicoDestino= historicoDestino;
     }
 
     public Long getIdConta() {
@@ -94,12 +98,18 @@ public class ContaBancaria implements Serializable {
         this.chavePix = chavePix;
     }
 
-    public List<Transacao> getHistoricoDeTransacao() {
-        return historicoDeTransacao;
+    public List<Transacao> getHistoricoOrigem() {
+        return historicoOrigem;
     }
 
-    public void setHistoricoDeTransacao(List<Transacao> historicoDeTransacao) {
-        this.historicoDeTransacao = historicoDeTransacao;
+    public void setHistoricoOrigem(List<Transacao> historicoOrigem) {
+        this.historicoOrigem = historicoOrigem;
+    }
+    public List<Transacao> getHistoricoDestino() {
+        return historicoDestino;
+    }
+    public void setHistoricoDestino(List<Transacao> historicoDestino) {
+        this.historicoDestino = historicoDestino;
     }
 
     @Override
@@ -109,23 +119,12 @@ public class ContaBancaria implements Serializable {
     }
 
 
-    public List<Transacao> consultarHistorico() { //checar cami
-        return this.historicoDeTransacao; //vamos falar com a Cami
+    public List<Transacao> consultarOrigem() { //checar cami
+        return this.historicoOrigem; //vamos falar com a Cami
     }
 
-    public void cadastrarConta(){
-
-    }    
-
-    public void excluirConta(){
-
+    public List<Transacao> consultarDestino() { //checar cami
+        return this.historicoDestino; //vamos falar com a Cami
     }
 
-    public double consultaSaldo(){
-        return this.saldo;
-    }
-
-    public void alterarSaldo(){
-
-    }
 }

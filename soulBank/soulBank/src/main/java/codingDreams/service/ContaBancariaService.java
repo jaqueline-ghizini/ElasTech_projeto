@@ -4,16 +4,17 @@ import codingDreams.model.ContaBancaria;
 import codingDreams.repository.ContaBancariaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Component
+@Service
 public class ContaBancariaService {
     @Autowired
-    private ContaBancariaRepository cr;
+    private ContaBancariaRepository sr;
 
     public Optional<ContaBancaria> realizarConsultaConta(Long idConta) {
-        return cr.findById(idConta);
+        return sr.findById(idConta);
     }
 
     public ContaBancaria realizarAlteracaoConta(ContaBancaria contaBancaria) {
@@ -27,6 +28,10 @@ public class ContaBancariaService {
         }else{
 
         }
-        return cr.save(contaBancaria);
+        return sr.save(contaBancaria);
+    }
+
+    public ContaBancaria cadastrarConta(ContaBancaria contaBancaria) {
+        return sr.save(contaBancaria);
     }
 }

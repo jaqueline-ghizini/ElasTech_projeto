@@ -1,6 +1,7 @@
 package codingDreams.controller;
 
 import codingDreams.model.ContaBancaria;
+import codingDreams.model.Transacao;
 import codingDreams.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,9 @@ public class ContaBancariaController {
         public ResponseEntity<ContaBancaria> realizarAlteracaoConta(@RequestBody ContaBancaria contaBancaria){
             return ResponseEntity.ok(cs.realizarAlteracaoConta(contaBancaria));
         }
+        @PostMapping
+        public ResponseEntity<ContaBancaria> cadastrarConta(@RequestBody ContaBancaria contaBancaria){
+            return ResponseEntity.ok(cs.cadastrarConta(contaBancaria));
+    }
 
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 
-public class Transacao implements Serializable {
+public class Transacao{
 
     @Id
     @GeneratedValue
@@ -14,9 +14,11 @@ public class Transacao implements Serializable {
     private int tipoTransacao;
 
 
-    @ManyToOne @JoinColumn(name="idConta")
-    private ContaBancaria contaOrigem, contaDestino; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
+    @ManyToOne @JoinColumn(name="idOrigem")
+    private ContaBancaria contaOrigem; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
 
+    @ManyToOne @JoinColumn(name="idDestino")
+    private ContaBancaria  contaDestino;
     public Transacao(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }

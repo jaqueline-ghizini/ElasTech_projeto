@@ -1,5 +1,6 @@
 package codingDreams.controller;
 
+import codingDreams.exceptions.RegistroBancoException;
 import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
 import codingDreams.service.ContaBancariaService;
@@ -40,8 +41,16 @@ public class TransacaoController {
     }
 
     @PostMapping("/depositar")
-    public ResponseEntity<Transacao> realizarDeposito(@RequestBody Transacao transacao){
-        return ResponseEntity.ok(cs.realizarDeposito(transacao));
+    public ResponseEntity realizarDeposito(@RequestBody Transacao transacao){
+      try{
+          return ResponseEntity.ok(cs.realizarDeposito(transacao));
+      } catch(RegistroBancoException e){
+          return ResponseEntity
+                  .status(HttpStatus.NOT_FOUND)
+                  .body(e.getMessage());
+
+      }
+
     }
 
     @PostMapping("/sacar")
@@ -50,8 +59,15 @@ public class TransacaoController {
     }
 
     @PostMapping("/transferir")
-    public ResponseEntity<Transacao> realizarTransferencia(@RequestBody Transacao transacao){
-        return ResponseEntity.ok(cs.realizarTransferencia(transacao));
+    public ResponseEntity realizarTransferencia(@RequestBody Transacao transacao){
+
+        try{
+            return ResponseEntity.ok(cs.realizarTransferencia(transacao));
+        } catch(RegistroBancoException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/pix")

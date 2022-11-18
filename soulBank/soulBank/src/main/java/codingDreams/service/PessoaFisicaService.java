@@ -33,14 +33,18 @@ public class PessoaFisicaService {
     }
 
     public PessoaFisica cadastrarPF(PessoaFisica pessoaFisica) {//vamos realizar o cadastro do banco juntamente com o cadastro da pessoal,por isso criamos o metodo cadstrarConta e chamamos conta em pessoa
-        Endereco endereco = er.save(pessoaFisica.getEndereco());
-        pessoaFisica.setEndereco(endereco);
+        try {
+            Endereco endereco = er.save(pessoaFisica.getEndereco());
+            pessoaFisica.setEndereco(endereco);
 
-        ContaBancaria conta= cb.cadastrarConta(pessoaFisica.getContaBancaria());//cofirmar como fazer associação com a camis
-        pessoaFisica.setContaBancaria(conta);
+            ContaBancaria conta= cb.cadastrarConta(pessoaFisica.getContaBancaria());//cofirmar como fazer associação com a camis
+            pessoaFisica.setContaBancaria(conta);
 
-        return sr.save(pessoaFisica);//ao cadastrar, pegar a alternativa do criente de qual dado usar (cpf/cnpj, telefone, email), e cadastrar no bando de dados esse dado
-
+            pessoaFisica = sr.save(pessoaFisica);//ao cadastrar, pegar a alternativa do criente de qual dado usar (cpf/cnpj, telefone, email), e cadastrar no bando de dados esse dado
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return pessoaFisica;
     }
 
     public PessoaFisica realizarAlteracaoPF(PessoaFisica pessoaFisica) {
@@ -49,7 +53,7 @@ public class PessoaFisicaService {
 
         //para a realização do soft delete será alterado o status da conta de ativa para inativa
 
-        ContaBancaria conta= cb.cadastrarConta(pessoaFisica.getContaBancaria());
+        ContaBancaria conta= cb.realizarAlteracaoConta(pessoaFisica.getContaBancaria());
         pessoaFisica.setContaBancaria(conta);
 
         return sr.save(pessoaFisica);

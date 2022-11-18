@@ -1,5 +1,7 @@
 package codingDreams.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -22,9 +24,11 @@ public class ContaBancaria  {
 
     private boolean statusConta;
     @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
+    @JsonIgnore
     private List <Transacao> historicoOrigem;
 
     @OneToMany (mappedBy="contaDestino", targetEntity=Transacao.class)
+    @JsonIgnore
     private List <Transacao> historicoDestino;// explicar pq não utlizamos ManyToMany
 
 

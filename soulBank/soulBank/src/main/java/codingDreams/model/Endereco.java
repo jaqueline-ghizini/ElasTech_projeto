@@ -1,6 +1,8 @@
 package codingDreams.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -21,9 +23,11 @@ public class Endereco {
     private String cep;
 
     @OneToMany(mappedBy="endereco", targetEntity=PessoaFisica.class)
+    @JsonIgnore
     private Collection pessoaFisica;
 
     @OneToMany(mappedBy="endereco", targetEntity=PessoaJuridica.class)
+    @JsonIgnore
     private Collection pessoaJuridica;
 
 

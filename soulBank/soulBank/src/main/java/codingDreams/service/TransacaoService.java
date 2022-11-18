@@ -1,5 +1,6 @@
 package codingDreams.service;
 
+import codingDreams.exceptions.RegistroBancoException;
 import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
 import codingDreams.repository.ContaBancariaRepository;
@@ -31,40 +32,96 @@ public class TransacaoService {
         return sr.findById(idTransacao);
     }
 
-    public Transacao realizarDeposito(Transacao transacao) {
-        ContaBancaria contaDestino = cr.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
-        transacao.setContaDestino(contaDestino);
+    public Transacao realizarDeposito(Transacao transacao) throws RegistroBancoException{
 
-        Double saldoDestino = contaDestino.getSaldo();
-        Double valorDeposito = transacao.getValor();
+            ContaBancaria contaDestino = cr.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
+           if(contaDestino==null){
+               throw new RegistroBancoException("Conta Destino não encontrada");
+           }
+            transacao.setContaDestino(contaDestino);
 
-        saldoDestino = saldoDestino + valorDeposito;
+            Double saldoDestino = contaDestino.getSaldo();
+            Double valorDeposito = transacao.getValor();
 
-        contaDestino.setSaldo(saldoDestino);
-        cr.save(contaDestino);
+            saldoDestino = saldoDestino + valorDeposito;
 
-        transacao.setContaDestino(contaDestino);
+            contaDestino.setSaldo(saldoDestino);
+            cr.save(contaDestino);
 
-        return sr.save(transacao);
+            transacao.setContaDestino(contaDestino);
+
+           return sr.save(transacao);
+
     }
 
     public Transacao realizarSaque(Transacao transacao) {
-        return sr.save(transacao);
-    }
-
-    public Transacao realizarTransferencia(Transacao transacao) {
         ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         transacao.setContaOrigem(contaOrigem);
 
+        Double saldoOrigem = contaOrigem.getSaldo();
+        Double valorTransferencia = transacao.getValor();
+
+        saldoOrigem = saldoOrigem - valorTransferencia;
+
+        contaOrigem.setSaldo(saldoOrigem);
+        cr.save(contaOrigem);
+
+        transacao.setContaOrigem(contaOrigem);
+        return sr.save(transacao);
+    }
+
+    public Transacao realizarTransferencia(Transacao transacao) throws RegistroBancoException {
+        ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
+        //if(contaOrigem==null){
+           // throw new RegistroBancoException("Conta Origem não encontrada");
+        //}
+        transacao.setContaOrigem(contaOrigem);
+
         ContaBancaria contaDestino = cr.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
+        //if(contaDestino==null){
+            //throw new RegistroBancoException("Conta Destino não encontrada");
+       // }
+        transacao.setContaDestino(contaDestino);
+
+        Double saldoOrigem = contaOrigem.getSaldo();
+        Double valorLimite = contaOrigem.getLimite();
+        Double saldoDestino = contaDestino.getSaldo();
+        Double valorTransferencia = transacao.getValor();
+
+        Double saldoTotalOrigem = valorLimite + saldoOrigem;
+
+        if(saldoTotalOrigem >= valorTransferencia){
+            saldoOrigem = saldoOrigem - valorTransferencia;
+            saldoDestino = saldoDestino + valorTransferencia;
+
+            contaOrigem.setSaldo(saldoOrigem);
+            cr.save(contaOrigem);
+
+            contaDestino.setSaldo(saldoDestino);
+            cr.save(contaDestino);
+        }else {
+            throw new RegistroBancoException("Saldo insuficiente para realizar a transação");
+        }
+
+        transacao.setContaOrigem(contaOrigem);
+        transacao.setContaDestino(contaDestino);
+
+        return sr.save(transacao);
+    }
+
+    public Transacao realizarPix(Transacao transacao) {
+        ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(),transacao.getContaOrigem().getAgencia());
+        transacao.setContaOrigem(contaOrigem);
+
+        ContaBancaria contaDestino = cr.findByChavePix(transacao.getContaDestino().getChavePix());
         transacao.setContaDestino(contaDestino);
 
         Double saldoOrigem = contaOrigem.getSaldo();
         Double saldoDestino = contaDestino.getSaldo();
-        Double valorTransferencia = transacao.getValor();
+        Double valorPix = transacao.getValor();
 
-        saldoOrigem = saldoOrigem - valorTransferencia;
-        saldoDestino = saldoDestino + valorTransferencia;
+        saldoOrigem = saldoOrigem - valorPix;
+        saldoDestino = saldoDestino + valorPix;
 
         contaOrigem.setSaldo(saldoOrigem);
         cr.save(contaOrigem);
@@ -76,9 +133,5 @@ public class TransacaoService {
         transacao.setContaDestino(contaDestino);
 
         return sr.save(transacao);
-    }
-
-    public Transacao realizarPix(Transacao transacao) {
-        return sr.save((transacao));
     }
 }

@@ -78,8 +78,8 @@ public class PessoaFisicaService {
         Endereco endereco = enderecoRepository.save(pessoaFisica.getEndereco());
         pessoaFisica.setEndereco(endereco);
 
-        ContaBancaria conta = contaBancariaRepository.findByContaAndAgencia(pessoaFisica.getContaBancaria().getConta(), pessoaFisica.getContaBancaria().getConta());
-        //ContaBancaria conta= contaBancariaService.realizarAlteracaoConta(pessoaFisica.getContaBancaria());
+
+        ContaBancaria conta= contaBancariaService.realizarAlteracaoConta(pessoaFisica.getContaBancaria());
         //para a realização do soft delete será alterado o status da conta de ativa para inativa
         //ao inativar cliente, automaticamente inativa a conta
         if (pessoaFisica.getStatusCliente() == false){
@@ -115,7 +115,7 @@ public class PessoaFisicaService {
                 break;
         }
 
-        contaBancariaRepository.save(conta);// for por findby
+        //contaBancariaRepository.save(conta);// for por findby
         pessoaFisica.setContaBancaria(conta);
         return pessoaFisicaRepository.save(pessoaFisica);
     }

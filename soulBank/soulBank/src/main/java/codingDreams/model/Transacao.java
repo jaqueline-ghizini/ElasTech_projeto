@@ -1,6 +1,7 @@
 package codingDreams.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 
@@ -12,22 +13,25 @@ public class Transacao{
     private double valor;
     private String tipoTransacao;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataTransacao;
 
     @ManyToOne @JoinColumn(name="idOrigem")
     private ContaBancaria contaOrigem; // como o relacionamento entre contaBancaria e transação é 2:N , sendo que contaBancaria realiza varias transações e transação recebe duas contas (Origem/Destino), decidimos importar objetos do tipo contaBancaria na transação
 
     @ManyToOne @JoinColumn(name="idDestino")
     private ContaBancaria  contaDestino;
+
     public Transacao(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public Transacao(Long idTransacao, double valor, String tipoTransacao, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
+    public Transacao(Long idTransacao, double valor, String tipoTransacao, Date dataTransacao, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
         this.idTransacao = idTransacao;
         this.valor = valor;
         this.tipoTransacao = tipoTransacao;
+        this.dataTransacao = dataTransacao;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
-
     }
 
     public Long getIdTransacao() {
@@ -50,6 +54,14 @@ public class Transacao{
         return tipoTransacao;
     }
 
+    public Date getDataTransacao() {
+        return dataTransacao;
+    }
+
+    public void setDataTransacao(Date dataTransacao) {
+        this.dataTransacao = dataTransacao;
+    }
+
     public void setTipoTransacao(String tipoTransacao) {
         this.tipoTransacao = tipoTransacao;
     }
@@ -70,11 +82,9 @@ public class Transacao{
         this.contaDestino = contaDestino;
     }
 
-
     @Override
     public String toString() {
-		return this.idTransacao + "/" + this.valor + "/"  + this.tipoTransacao + "/" + contaOrigem.toString()+"/" + contaDestino.toString();
-
+		return this.idTransacao + "/" + this.valor + "/"  + this.tipoTransacao + "/" +this.dataTransacao+ "/" +contaOrigem.toString()+"/" + contaDestino.toString();
     }
 
 }

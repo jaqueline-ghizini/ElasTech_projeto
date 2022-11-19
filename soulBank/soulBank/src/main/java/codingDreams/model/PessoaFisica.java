@@ -7,16 +7,17 @@ import java.util.Objects;
 
 public class PessoaFisica extends Cliente{
 
+    @Column(unique=true, insertable = true, updatable = false)
     @Id
-    private String cpf; //ver com a prof se fica automaticamente final
+    private String cpf;
+    @Column(unique=true)
     private String rg;
     private String nome;
     @ManyToOne @JoinColumn(name="idEndereco")
     private Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
-
-
     @OneToOne
     private ContaBancaria contaBancaria;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,13 +25,10 @@ public class PessoaFisica extends Cliente{
         PessoaFisica pessoaFisica = (PessoaFisica) o;
         return Objects.equals(cpf, pessoaFisica.cpf);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(cpf);
     }
-
-
 
 
     public PessoaFisica(){

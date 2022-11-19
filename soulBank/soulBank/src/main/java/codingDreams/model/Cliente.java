@@ -5,7 +5,9 @@ import javax.persistence.*;
 @MappedSuperclass
 public class Cliente {//possibilidade de implementação relação n:n cliente e conta bancaria
     // não geramos id por ser uma superClasse, e toda consulta será nas classes filhas(entidades)
+    @Column(unique=true)
     protected String email;
+    @Column(unique=true)
     protected String telefone;
     protected boolean statusCliente;
 

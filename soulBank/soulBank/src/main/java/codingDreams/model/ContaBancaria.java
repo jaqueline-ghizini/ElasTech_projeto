@@ -12,18 +12,18 @@ public class ContaBancaria  {
     @Id
     @GeneratedValue
     private Long idConta;
-
+    //descidimos colocar como unique dados importantes que são unicos pra cada conta e também a chave
+    //é possível fazer consulta por conta e agencia
+    @Column(unique=true)
     private String conta;
-    private String agencia;//botar como id tbm
+    private String agencia;
     private double saldo;
     private double limite;
-
     private boolean chequeEspecial; // se for tipo false, não é conta especial, então o limite é zero. Se for tipo true, é especial e tem limite
-    private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
-
-    private int tipoChavePix;
-
-    private boolean statusConta;
+    @Column(unique=true)
+    private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (chave aleatória, cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
+    private int tipoChavePix; //escolhemos usar o int pra informar a opção de dados de Pix. Sendo 1 - chave aleatória, 2 - cpf/cnpj, 3 - telefone e 4 - email
+    private boolean statusConta;//pra verificar se está ativa ou inativa. Uma conta é desativada quando o cliente é desativado
     @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
     @JsonIgnore
     private List <Transacao> historicoOrigem;
@@ -143,7 +143,7 @@ public class ContaBancaria  {
     
     }
 
-
+/*
     public List<Transacao> consultarOrigem() { //checar cami
         return this.historicoOrigem; //vamos falar com a Cami
     }
@@ -151,5 +151,5 @@ public class ContaBancaria  {
     public List<Transacao> consultarDestino() { //checar cami
         return this.historicoDestino; //vamos falar com a Cami
     }
-
+*/
 }

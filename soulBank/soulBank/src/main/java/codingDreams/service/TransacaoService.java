@@ -15,17 +15,17 @@ import java.util.Optional;
 public class TransacaoService {
 
     @Autowired
-    private TransacaoRepository sr;
+    private TransacaoRepository transacaoRepository;
 
     @Autowired
     private ContaBancariaRepository contaBancariaRepository;
 
     public List<Transacao> consultarHistorico() {
-        return sr.findAll();
+        return transacaoRepository.findAll();
     }
 
     public Optional<Transacao> consultarTransacao(Long idTransacao) {
-        return sr.findById(idTransacao);
+        return transacaoRepository.findById(idTransacao);
     }
 
     public Transacao realizarDeposito(Transacao transacao) throws RegistroBancoException{
@@ -48,7 +48,7 @@ public class TransacaoService {
 
             transacao.setTipoTransacao("Deposito");
 
-           return sr.save(transacao);
+           return transacaoRepository.save(transacao);
 
     }
 
@@ -77,7 +77,7 @@ public class TransacaoService {
     }
         transacao.setContaOrigem(contaOrigem);
         transacao.setTipoTransacao("Saque");
-        return sr.save(transacao);
+        return transacaoRepository.save(transacao);
     }
 
     public Transacao realizarTransferencia(Transacao transacao) throws RegistroBancoException {
@@ -116,7 +116,7 @@ public class TransacaoService {
         transacao.setContaOrigem(contaOrigem);
         transacao.setContaDestino(contaDestino);
         transacao.setTipoTransacao("Transferencia");
-        return sr.save(transacao);
+        return transacaoRepository.save(transacao);
     }
 
     public Transacao realizarPix(Transacao transacao) throws RegistroBancoException{
@@ -158,6 +158,6 @@ public class TransacaoService {
         transacao.setContaDestino(contaDestino);
         transacao.setTipoTransacao("Pix");
         
-        return sr.save(transacao);
+        return transacaoRepository.save(transacao);
     }
 }

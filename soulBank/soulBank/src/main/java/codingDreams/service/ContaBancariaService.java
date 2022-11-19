@@ -9,35 +9,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContaBancariaService {
     @Autowired
-    private ContaBancariaRepository sr;
+    private ContaBancariaRepository contaBancariaRepository;
 
     public ContaBancaria realizarConsultaConta(String numConta, String numAgencia) {
-        return sr.findByContaAndAgencia(numConta, numAgencia);
-
+        return contaBancariaRepository.findByContaAndAgencia(numConta, numAgencia);
     }
 
     public ContaBancaria realizarAlteracaoConta(ContaBancaria contaBancaria) {
-    
         if (contaBancaria.getChequeEspecial() == false) {
-        
             Double valorLimite = 0.00;
-            
             contaBancaria.setLimite(valorLimite);
-                 
-           }
-
-         return sr.save(contaBancaria);
+        }
+            return contaBancariaRepository.save(contaBancaria);
     }
 
     public ContaBancaria cadastrarConta(ContaBancaria contaBancaria) {
        if (contaBancaria.getChequeEspecial() == false) {
-        
-        Double valorLimite = 0.00;
-        
-        contaBancaria.setLimite(valorLimite);
-             
+            Double valorLimite = 0.00;
+            contaBancaria.setLimite(valorLimite);
        }
-        
-        return sr.save(contaBancaria);
+            return contaBancariaRepository.save(contaBancaria);
     }
 }

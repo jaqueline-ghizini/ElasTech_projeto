@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity
 
 public class PessoaJuridica extends Cliente {
-
+    @Column(unique=true)
     @Id
     private String cnpj;
     private String razaoSocial;
@@ -26,7 +26,6 @@ public class PessoaJuridica extends Cliente {
         PessoaJuridica pessoaJuridica = (PessoaJuridica) o;
         return Objects.equals(cnpj, pessoaJuridica.cnpj);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(cnpj);

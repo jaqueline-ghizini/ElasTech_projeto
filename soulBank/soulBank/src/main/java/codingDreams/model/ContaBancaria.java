@@ -14,7 +14,7 @@ public class ContaBancaria  {
     private Long idConta;
     //descidimos colocar como unique dados importantes que são unicos pra cada conta e também a chave
     //é possível fazer consulta por conta e agencia
-    @Column(unique=true)
+    //@Column(unique=true)
     private String conta;
     private String agencia;
     private double saldo;

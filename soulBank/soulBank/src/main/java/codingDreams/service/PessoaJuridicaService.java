@@ -32,6 +32,7 @@ public class PessoaJuridicaService {
     }
 
     public PessoaJuridica cadastrarPJ(PessoaJuridica pessoaJuridica) {
+
         Endereco endereco = enderecoRepository.save(pessoaJuridica.getEndereco());
         pessoaJuridica.setEndereco(endereco);
 
@@ -66,7 +67,9 @@ public class PessoaJuridicaService {
         //contaBancariaRepository.save(conta);
         pessoaJuridica.setContaBancaria(conta);
 
-        return pessoaJuridicaRepository.save(pessoaJuridica);
+        pessoaJuridica = pessoaJuridicaRepository.save(pessoaJuridica);
+
+        return pessoaJuridica;
     }
 
     public PessoaJuridica realizarAlteracaoPJ(PessoaJuridica pessoaJuridica) {
@@ -108,7 +111,7 @@ public class PessoaJuridicaService {
                 conta.setChavePix(null);
                 break;
         }
-        contaBancariaRepository.save(conta);
+        //contaBancariaRepository.save(conta);
         pessoaJuridica.setContaBancaria(conta);
 
         return pessoaJuridicaRepository.save(pessoaJuridica);

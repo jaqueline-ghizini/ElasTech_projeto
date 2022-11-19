@@ -1,7 +1,6 @@
 package codingDreams.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 
@@ -11,7 +10,7 @@ public class Transacao{
     @GeneratedValue
     private Long idTransacao;
     private double valor;
-    private int tipoTransacao;
+    private String tipoTransacao;
 
 
     @ManyToOne @JoinColumn(name="idOrigem")
@@ -22,7 +21,7 @@ public class Transacao{
     public Transacao(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public Transacao(Long idTransacao, double valor, int tipoTransacao, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
+    public Transacao(Long idTransacao, double valor, String tipoTransacao, ContaBancaria contaOrigem, ContaBancaria contaDestino) {
         this.idTransacao = idTransacao;
         this.valor = valor;
         this.tipoTransacao = tipoTransacao;
@@ -47,11 +46,11 @@ public class Transacao{
         this.valor = valor;
     }
 
-    public int getTipoTransacao() {
+    public String getTipoTransacao() {
         return tipoTransacao;
     }
 
-    public void setTipoTransacao(int tipoTransacao) {
+    public void setTipoTransacao(String tipoTransacao) {
         this.tipoTransacao = tipoTransacao;
     }
 
@@ -75,18 +74,6 @@ public class Transacao{
     @Override
     public String toString() {
 		return this.idTransacao + "/" + this.valor + "/"  + this.tipoTransacao + "/" + contaOrigem.toString()+"/" + contaDestino.toString();
-
-    }
-
-    public void realizarTransferencia(){
-
-    }
-
-    public void realizarDeposito(){
-
-    }
-
-    public void realizarSaque(){
 
     }
 

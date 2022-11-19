@@ -1,9 +1,7 @@
 package codingDreams.controller;
 
 import codingDreams.exceptions.RegistroBancoException;
-import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
-import codingDreams.service.ContaBancariaService;
 import codingDreams.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,13 +52,19 @@ public class TransacaoController {
     }
 
     @PostMapping("/sacar")
-    public ResponseEntity<Transacao> realizarSaque(@RequestBody Transacao transacao){
-        return ResponseEntity.ok(cs.realizarSaque(transacao));
+    public ResponseEntity realizarSaque(@RequestBody Transacao transacao){
+       try{
+            return ResponseEntity.ok(cs.realizarSaque(transacao));
+        } catch(RegistroBancoException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+  
+        }
     }
 
     @PostMapping("/transferir")
     public ResponseEntity realizarTransferencia(@RequestBody Transacao transacao){
-
         try{
             return ResponseEntity.ok(cs.realizarTransferencia(transacao));
         } catch(RegistroBancoException e){
@@ -71,8 +75,15 @@ public class TransacaoController {
     }
 
     @PostMapping("/pix")
-    public ResponseEntity<Transacao> realizarPix(@RequestBody Transacao transacao){
-        return ResponseEntity.ok(cs.realizarPix(transacao));
+    public ResponseEntity realizarPix(@RequestBody Transacao transacao){
+        try{
+            return ResponseEntity.ok(cs.realizarPix(transacao));
+        } catch(RegistroBancoException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        
+        }
     }
 
 }

@@ -2,36 +2,42 @@ package codingDreams.service;
 
 import codingDreams.model.ContaBancaria;
 import codingDreams.repository.ContaBancariaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ContaBancariaService {
     @Autowired
     private ContaBancariaRepository sr;
 
-    public Optional<ContaBancaria> realizarConsultaConta(Long idConta) {
-        return sr.findById(idConta);
+    public ContaBancaria realizarConsultaConta(String numConta, String numAgencia) {
+        return sr.findByContaAndAgencia(numConta, numAgencia);
+
     }
 
     public ContaBancaria realizarAlteracaoConta(ContaBancaria contaBancaria) {
-        //fazer alteração conta
+    
+        if (contaBancaria.getChequeEspecial() == false) {
+        
+            Double valorLimite = 0.00;
+            
+            contaBancaria.setLimite(valorLimite);
+                 
+           }
 
-        //1 para especial e 0 para normal
-        boolean tipoConta = false;
-
-        if(tipoConta){
-
-        }else{
-
-        }
-        return sr.save(contaBancaria);
+         return sr.save(contaBancaria);
     }
 
     public ContaBancaria cadastrarConta(ContaBancaria contaBancaria) {
+       if (contaBancaria.getChequeEspecial() == false) {
+        
+        Double valorLimite = 0.00;
+        
+        contaBancaria.setLimite(valorLimite);
+             
+       }
+        
         return sr.save(contaBancaria);
     }
 }

@@ -3,7 +3,6 @@ package codingDreams.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -21,6 +20,8 @@ public class ContaBancaria  {
 
     private boolean chequeEspecial; // se for tipo false, não é conta especial, então o limite é zero. Se for tipo true, é especial e tem limite
     private String chavePix; // decidimos colocar essa opção por ser bem atual, prática e usada. Ele vai receber o dado (cpf/cnpj, telefone, email) juntamento com o cadastro do cliente.
+
+    private int tipoChavePix;
 
     private boolean statusConta;
     @OneToMany (mappedBy="contaOrigem", targetEntity=Transacao.class)
@@ -44,6 +45,7 @@ public class ContaBancaria  {
         this.limite = limite;
         this.chequeEspecial = chequeEspecial;
         this.chavePix = chavePix;
+        this.tipoChavePix = tipoChavePix;
         this.historicoOrigem = historicoOrigem;
         this.historicoDestino= historicoDestino;
         this.statusConta = statusConta;
@@ -89,7 +91,7 @@ public class ContaBancaria  {
         this.limite = limite;
     }
 
-    public boolean isChequeEspecial() {
+    public boolean getChequeEspecial() {
         return chequeEspecial;
     }
 
@@ -103,6 +105,14 @@ public class ContaBancaria  {
 
     public void setChavePix(String chavePix) {
         this.chavePix = chavePix;
+    }
+
+    public int getTipoChavePix() {
+        return tipoChavePix;
+    }
+
+    public void setTipoChavePix(int tipoChavePix) {
+        this.tipoChavePix = tipoChavePix;
     }
 
     public List<Transacao> getHistoricoOrigem() {
@@ -119,7 +129,7 @@ public class ContaBancaria  {
         this.historicoDestino = historicoDestino;
     }
 
-    public boolean isStatusConta() {
+    public boolean getStatusConta() {
         return statusConta;
     }
 

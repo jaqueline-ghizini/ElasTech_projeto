@@ -1,14 +1,11 @@
 package codingDreams.controller;
 
 import codingDreams.model.ContaBancaria;
-import codingDreams.model.Transacao;
 import codingDreams.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 @RestController
@@ -19,19 +16,15 @@ public class ContaBancariaController {
         @Autowired
         private ContaBancariaService cs;
 
-        @GetMapping("/consultarconta/{conta}")
-        public ResponseEntity<?> realizarConsultaConta(@PathVariable Long idConta){
-            //System.out.println("Conta a ser localizada: "+conta);
-            //ContaBancaria contBank = new ContaBancaria();
-            //contBank.setConta(conta);
-            //contBank.setSaldo(200.00);
+        @GetMapping("/consultarconta/{conta}/{agencia}")
+        public ResponseEntity<?> realizarConsultaConta(@PathVariable String conta, @PathVariable String agencia){
+            
+            ContaBancaria contaBancaria = cs.realizarConsultaConta(conta, agencia);
 
-            Optional<ContaBancaria> opcao = cs.realizarConsultaConta(idConta);
-
-            if(opcao.isPresent()){
-                return ResponseEntity.ok(opcao.get());
+            if(contaBancaria != null){
+                return ResponseEntity.ok(contaBancaria);
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Conta Bancária não encontrada",HttpStatus.NOT_FOUND);
         }
 
         //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.

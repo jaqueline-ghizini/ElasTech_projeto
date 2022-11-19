@@ -7,7 +7,6 @@ public class Cliente {//possibilidade de implementação relação n:n cliente e
     // não geramos id por ser uma superClasse, e toda consulta será nas classes filhas(entidades)
     protected String email;
     protected String telefone;
-
     protected boolean statusCliente;
 
 
@@ -27,14 +26,6 @@ public class Cliente {//possibilidade de implementação relação n:n cliente e
 
     }
 
-    //public Long getIdCliente() {
-      //  return idCliente;
-   // }
-
-    //public void setIdCliente(Long idCliente) {
-      //  this.idCliente = idCliente;
-    //}
-
     public String getEmail() {
         return email;
     }
@@ -51,7 +42,7 @@ public class Cliente {//possibilidade de implementação relação n:n cliente e
         this.telefone = telefone;
     }
 
-    public boolean isStatusCliente() {
+    public boolean getStatusCliente() {
         return statusCliente;
     }
 

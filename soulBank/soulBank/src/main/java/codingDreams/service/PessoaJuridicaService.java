@@ -4,10 +4,8 @@ import codingDreams.model.ContaBancaria;
 import codingDreams.model.Endereco;
 import codingDreams.model.PessoaJuridica;
 import codingDreams.repository.EnderecoRepository;
-import codingDreams.repository.PessoaFisicaRepository;
 import codingDreams.repository.PessoaJuridicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,14 +41,14 @@ public class PessoaJuridicaService {
         Endereco endereco = er.save(pessoaJuridica.getEndereco());
         pessoaJuridica.setEndereco(endereco);
 
-        //para a realização do soft delete será alterado o status da conta de ativa para inativa
-
         ContaBancaria conta= cb.cadastrarConta(pessoaJuridica.getContaBancaria());
+       //para a realização do soft delete será alterado o status da conta de ativa para inativa.
+       //ao inativar cliente, automaticamente inativa a conta
+        if (pessoaJuridica.getStatusCliente() == false){
+            conta.setStatusConta(false);
+        }
+
         pessoaJuridica.setContaBancaria(conta);
-
-
-
-
 
         return sr.save(pessoaJuridica);
     }

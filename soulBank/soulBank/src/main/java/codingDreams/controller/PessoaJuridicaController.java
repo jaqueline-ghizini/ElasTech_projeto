@@ -1,9 +1,6 @@
 package codingDreams.controller;
 
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.PessoaFisica;
 import codingDreams.model.PessoaJuridica;
-import codingDreams.service.ContaBancariaService;
 import codingDreams.service.PessoaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -18,7 +18,7 @@ public class TransacaoService {
     private TransacaoRepository sr;
 
     @Autowired
-    private ContaBancariaRepository cr;
+    private ContaBancariaRepository contaBancariaRepository;
 
     public List<Transacao> consultarHistorico() {
         return sr.findAll();
@@ -30,7 +30,7 @@ public class TransacaoService {
 
     public Transacao realizarDeposito(Transacao transacao) throws RegistroBancoException{
 
-            ContaBancaria contaDestino = cr.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
+            ContaBancaria contaDestino = contaBancariaRepository.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
            if(contaDestino==null){
                throw new RegistroBancoException("Conta Destino não encontrada");
            }
@@ -42,7 +42,7 @@ public class TransacaoService {
             saldoDestino = saldoDestino + valorDeposito;
 
             contaDestino.setSaldo(saldoDestino);
-            cr.save(contaDestino);
+            contaBancariaRepository.save(contaDestino);
 
             transacao.setContaDestino(contaDestino);
 
@@ -53,7 +53,7 @@ public class TransacaoService {
     }
 
     public Transacao realizarSaque(Transacao transacao) throws RegistroBancoException{
-        ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
+        ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
             throw new RegistroBancoException("Conta Origem não encontrada");
         }
@@ -70,7 +70,7 @@ public class TransacaoService {
         saldoOrigem = saldoOrigem - valorSaque;
 
         contaOrigem.setSaldo(saldoOrigem);
-        cr.save(contaOrigem);
+        contaBancariaRepository.save(contaOrigem);
 
     }else {
         throw new RegistroBancoException("Saldo insuficiente para realizar o saque");
@@ -81,13 +81,13 @@ public class TransacaoService {
     }
 
     public Transacao realizarTransferencia(Transacao transacao) throws RegistroBancoException {
-        ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
+        ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
            throw new RegistroBancoException("Conta Origem não encontrada");
         }
         transacao.setContaOrigem(contaOrigem);
 
-        ContaBancaria contaDestino = cr.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
+        ContaBancaria contaDestino = contaBancariaRepository.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
         if(contaDestino==null){
             throw new RegistroBancoException("Conta Destino não encontrada");
        }
@@ -105,10 +105,10 @@ public class TransacaoService {
             saldoDestino = saldoDestino + valorTransferencia;
 
             contaOrigem.setSaldo(saldoOrigem);
-            cr.save(contaOrigem);
+            contaBancariaRepository.save(contaOrigem);
 
             contaDestino.setSaldo(saldoDestino);
-            cr.save(contaDestino);
+            contaBancariaRepository.save(contaDestino);
         }else {
             throw new RegistroBancoException("Saldo insuficiente para realizar a transação");
         }
@@ -120,13 +120,13 @@ public class TransacaoService {
     }
 
     public Transacao realizarPix(Transacao transacao) throws RegistroBancoException{
-        ContaBancaria contaOrigem = cr.findByContaAndAgencia(transacao.getContaOrigem().getConta(),transacao.getContaOrigem().getAgencia());
+        ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(),transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
             throw new RegistroBancoException("Conta Origem não encontrada");
          } 
         transacao.setContaOrigem(contaOrigem);
       
-        ContaBancaria contaDestino = cr.findByChavePix(transacao.getContaDestino().getChavePix());
+        ContaBancaria contaDestino = contaBancariaRepository.findByChavePix(transacao.getContaDestino().getChavePix());
         if(contaDestino==null){
              throw new RegistroBancoException("Conta Destino não encontrada");
         }
@@ -145,10 +145,10 @@ public class TransacaoService {
             saldoDestino = saldoDestino + valorPix;
 
             contaOrigem.setSaldo(saldoOrigem);
-            cr.save(contaOrigem);
+            contaBancariaRepository.save(contaOrigem);
 
             contaDestino.setSaldo(saldoDestino);
-            cr.save(contaDestino);
+            contaBancariaRepository.save(contaDestino);
 
          }else {
             throw new RegistroBancoException("Saldo insuficiente para realizar a transação");

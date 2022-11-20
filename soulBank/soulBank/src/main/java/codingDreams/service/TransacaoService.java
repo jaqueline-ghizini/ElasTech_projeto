@@ -8,6 +8,7 @@ import codingDreams.repository.TransacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,8 @@ public class TransacaoService {
            if(contaDestino==null){
                throw new RegistroBancoException("Conta Destino não encontrada");
            }
+
+            transacao.setDataTransacao(new Date());
             transacao.setContaDestino(contaDestino);
 
             Double saldoDestino = contaDestino.getSaldo();
@@ -57,6 +60,7 @@ public class TransacaoService {
         if(contaOrigem==null){
             throw new RegistroBancoException("Conta Origem não encontrada");
         }
+        transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
 
         Double saldoOrigem = contaOrigem.getSaldo();
@@ -85,6 +89,7 @@ public class TransacaoService {
         if(contaOrigem==null){
            throw new RegistroBancoException("Conta Origem não encontrada");
         }
+        transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
 
         ContaBancaria contaDestino = contaBancariaRepository.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
@@ -123,7 +128,8 @@ public class TransacaoService {
         ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(),transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
             throw new RegistroBancoException("Conta Origem não encontrada");
-         } 
+         }
+        transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
       
         ContaBancaria contaDestino = contaBancariaRepository.findByChavePix(transacao.getContaDestino().getChavePix());

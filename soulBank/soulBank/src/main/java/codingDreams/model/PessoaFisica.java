@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PessoaFisica extends Cliente{
 
-    @Column(unique=true, insertable = true, updatable = false)
+    @Column(unique=true)
     @Id
     private String cpf;
     @Column(unique=true)

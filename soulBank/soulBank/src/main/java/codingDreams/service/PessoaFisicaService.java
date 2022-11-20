@@ -83,6 +83,7 @@ public class PessoaFisicaService {
         //para a realização do soft delete será alterado o status da conta de ativa para inativa
         //ao inativar cliente, automaticamente inativa a conta
         if (pessoaFisica.getStatusCliente() == false){
+            //verificar se o saldo está zerado antes
             conta.setStatusConta(false);
         }
 

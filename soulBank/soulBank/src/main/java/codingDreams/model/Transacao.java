@@ -1,5 +1,7 @@
 package codingDreams.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +14,9 @@ public class Transacao{
     private Long idTransacao;
     private double valor;
     private String tipoTransacao;
+
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR")
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataTransacao;

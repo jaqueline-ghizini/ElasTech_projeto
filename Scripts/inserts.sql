@@ -7,7 +7,7 @@ insert into endereco(id_endereco,bairro,cep,cidade,complemento,estado,logradouro
 (4,"Americanopolis","09782-025","São Bernardo do Campo","Apto 03F","SP","Rua Marechal deodoro,123"),
 (5,"Jabaquara","09582-025","São Bernardo do Campo","Apto 85A","SP","Rua Alfredo reinaldin,50"),
 (6,"Conceição","01236-025","São Bernardo do Campo","Apto 123","SP","Travessa Pranto no Mar,17"),
-(7,"Vila Sonia","09912-024","São Bernardo do Campo","casa 1","SP","Rua Jorge Frances,13")
+(7,"Vila Sonia","09912-024","São Bernardo do Campo","casa 1","SP","Rua Jorge Frances,13"),
 (22,"Mary Dota","22277-005","Rio Claro","casa 2","SP","Rua dos Comerciários,80"),
 (23,"Jaragua","05032-025","Rio Claro","casa 12","SP","Rua dos Professores,12"),
 (24,"Jardim Planalto","09500-025","Rio Claro","Apto 85A","SP","Rua Alfredo reinaldin,72"),

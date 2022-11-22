@@ -134,7 +134,7 @@ public class TransacaoService {
       
         ContaBancaria contaDestino = contaBancariaRepository.findByChavePix(transacao.getContaDestino().getChavePix());
         if(contaDestino==null){
-             throw new VerificacaoSistemaException("Conta Destino não encontrada");
+             throw new VerificacaoSistemaException("Chave Pix não encontrada.");
         }
         transacao.setContaDestino(contaDestino);
 

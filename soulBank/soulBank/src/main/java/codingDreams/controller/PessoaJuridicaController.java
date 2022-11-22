@@ -1,5 +1,6 @@
 package codingDreams.controller;
 
+import codingDreams.exceptions.VerificacaoSistemaException;
 import codingDreams.model.PessoaJuridica;
 import codingDreams.service.PessoaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,42 +11,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/pessoajuridica") //apareceu um problema de ambiguidade e resolvemos colocando essa linha de código
+@RequestMapping("/pessoajuridica") //apareceu um problema de ambiguidade nos testes e resolvemos colocando essa linha de código
 public class PessoaJuridicaController {
 
     @Autowired
-    private PessoaJuridicaService cs;
+    private PessoaJuridicaService pessoaJuridicaService;
 
     @GetMapping("/consultarpj/{cnpj}")
     public ResponseEntity<?> realizarConsultaPJ(@PathVariable String cnpj ){
-       /* System.out.println("CNPJ do cliente a ser localizado: " +cnpj);
-        ContaBancaria conta = new ContaBancaria();
-        conta.setConta("1");
-        PessoaJuridica pj = new PessoaJuridica();
-        pj.setCnpj(cnpj);
-        pj.setRazaoSocial("razao social");
-        pj.setContaBancaria(conta);*/
 
-        Optional<PessoaJuridica> opcao = cs.realizarConsultaPJ(cnpj);
+        Optional<PessoaJuridica> opcao = pessoaJuridicaService.realizarConsultaPJ(cnpj);
 
         if(opcao.isPresent()){
             return ResponseEntity.ok(opcao.get());
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Cliente não encontrado.",HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity<PessoaJuridica> cadastrarPJ(@RequestBody PessoaJuridica pessoaJuridica){
-       /* System.out.println(pessoaJuridica.getCnpj());
-        System.out.println(pessoaJuridica.getRazaoSocial());
-        System.out.println(pessoaJuridica.getTelefone());
-        System.out.println(pessoaJuridica.getEndereco().getLogradouro());
-        System.out.println(pessoaJuridica.getContaBancaria().getSaldo());*/
-        return ResponseEntity.ok(cs.cadastrarPJ(pessoaJuridica));
+        return ResponseEntity.ok(pessoaJuridicaService.cadastrarPJ(pessoaJuridica));
     }
 
     @PutMapping
-    public ResponseEntity<PessoaJuridica> realizarAlteracaoPJ(@RequestBody PessoaJuridica pessoaJuridica){
-        return ResponseEntity.ok(cs.realizarAlteracaoPJ(pessoaJuridica));
+    public ResponseEntity realizarAlteracaoPJ(@RequestBody PessoaJuridica pessoaJuridica){
+
+        try{
+            return ResponseEntity.ok(pessoaJuridicaService.realizarAlteracaoPJ(pessoaJuridica));
+        } catch(VerificacaoSistemaException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 }

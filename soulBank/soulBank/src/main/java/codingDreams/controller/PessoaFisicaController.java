@@ -1,5 +1,6 @@
 package codingDreams.controller;
 
+import codingDreams.exceptions.VerificacaoSistemaException;
 import codingDreams.model.PessoaFisica;
 import codingDreams.service.PessoaFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,41 +15,33 @@ import java.util.Optional;
 public class PessoaFisicaController {
 
     @Autowired
-    private PessoaFisicaService cs;
+    private PessoaFisicaService pessoaFisicaService;
 
     @GetMapping("/consultapf/{cpf}")
     public ResponseEntity<?> realizarConsultaPF(@PathVariable String cpf){
-        /*System.out.println("CPF do cliente a ser localizado: " +cpf);
-        ContaBancaria conta = new ContaBancaria();
-        conta.setConta("1");
-        PessoaFisica pf = new PessoaFisica();
-        pf.setCpf(cpf);
-        pf.setNome("Nome");
-        pf.setContaBancaria(conta);*/
 
-        Optional<PessoaFisica> opcao = cs.realizarConsultaPF(cpf);
+        Optional<PessoaFisica> opcao = pessoaFisicaService.realizarConsultaPF(cpf);
 
         if(opcao.isPresent()){
             return ResponseEntity.ok(opcao.get());
         }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Cliente não encontrado.",HttpStatus.NOT_FOUND);
     }
     
     @PostMapping
     public ResponseEntity<PessoaFisica> cadastrarPF(@RequestBody PessoaFisica pessoaFisica){ // Observação a ser excluida: ser for testar sem ter o banco ainda, alterar o metodo com o valor de retorno e também o return
-       /* System.out.println(pessoaFisica.getCpf());
-        System.out.println(pessoaFisica.getNome());
-        System.out.println(pessoaFisica.getTelefone());
-        System.out.println(pessoaFisica.getEndereco().getLogradouro());
-        System.out.println(pessoaFisica.getContaBancaria().getSaldo());*/
-
-        return ResponseEntity.ok(cs.cadastrarPF(pessoaFisica));
-
+        return ResponseEntity.ok(pessoaFisicaService.cadastrarPF(pessoaFisica));
     }
     @PutMapping
-    public ResponseEntity<PessoaFisica> realizarAlteracaoPF(@RequestBody PessoaFisica pessoaFisica){
-        return ResponseEntity.ok(cs.realizarAlteracaoPF(pessoaFisica));
+    public ResponseEntity realizarAlteracaoPF(@RequestBody PessoaFisica pessoaFisica){
+
+        try{
+            return ResponseEntity.ok(pessoaFisicaService.realizarAlteracaoPF(pessoaFisica));
+        } catch(VerificacaoSistemaException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 }
 

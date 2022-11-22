@@ -8,8 +8,6 @@ public class  SoulBankApplication {
 
 	public static void main(String[] args) {
 
-
-
 		SpringApplication.run(SoulBankApplication.class, args);
 
 	}

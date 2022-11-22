@@ -1,6 +1,7 @@
 package codingDreams.controller;
 
 import codingDreams.exceptions.VerificacaoSistemaException;
+import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
 import codingDreams.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,57 +17,60 @@ import java.util.Optional;
 public class TransacaoController {
 
     @Autowired
-    private TransacaoService cs;
+    private TransacaoService transacaoService;
+
+  /*  @GetMapping("/consultarhistorico/{conta}/{agencia}")
+    public ResponseEntity<List<Transacao>> consultarHistorico(@PathVariable String conta, @PathVariable String agencia){
+        ContaBancaria contaBancaria = cs.consultarHistorico(conta, agencia);
+
+        if(contaBancaria != null){
+            return ResponseEntity.ok(cs.consultarHistorico());
+        }
+        return new ResponseEntity<>("Conta Bancária não encontrada",HttpStatus.NOT_FOUND);
+    }*/
 
     @GetMapping("/consultarhistorico")
     public ResponseEntity<List<Transacao>> consultarHistorico(){
-        return ResponseEntity.ok(cs.consultarHistorico());
+            return ResponseEntity.ok(transacaoService.consultarHistorico());
     }
 
     @GetMapping("/consultartransacao/{idTransacao}")
     public ResponseEntity<?> consultarTransacao(@PathVariable Long idTransacao){
-        /*System.out.println("Id da Transação a ser localizada: "+idTransacao);
-        Transacao transacao = new Transacao();
-        transacao.setIdTransacao(idTransacao);
-        transacao.setValor(100.00);*/
 
-        Optional<Transacao> opcao = cs.consultarTransacao(idTransacao);
+        Optional<Transacao> opcao = transacaoService.consultarTransacao(idTransacao);
 
         if(opcao.isPresent()){
             return ResponseEntity.ok(opcao.get());// Consulta especifica
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Transação não encontrada.",HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/depositar")
     public ResponseEntity realizarDeposito(@RequestBody Transacao transacao){
-      try{
-          return ResponseEntity.ok(cs.realizarDeposito(transacao));
-      } catch(VerificacaoSistemaException e){
+        try{
+          return ResponseEntity.ok(transacaoService.realizarDeposito(transacao));
+        } catch(VerificacaoSistemaException e){
           return ResponseEntity
                   .status(HttpStatus.NOT_FOUND)
                   .body(e.getMessage());
-
-      }
-
+        }
     }
 
     @PostMapping("/sacar")
     public ResponseEntity realizarSaque(@RequestBody Transacao transacao){
        try{
-            return ResponseEntity.ok(cs.realizarSaque(transacao));
-        } catch(VerificacaoSistemaException e){
+            return ResponseEntity.ok(transacaoService.realizarSaque(transacao));
+       } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
-  
-        }
+       }
     }
 
     @PostMapping("/transferir")
     public ResponseEntity realizarTransferencia(@RequestBody Transacao transacao){
         try{
-            return ResponseEntity.ok(cs.realizarTransferencia(transacao));
+            return ResponseEntity.ok(transacaoService.realizarTransferencia(transacao));
         } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
@@ -77,13 +81,11 @@ public class TransacaoController {
     @PostMapping("/pix")
     public ResponseEntity realizarPix(@RequestBody Transacao transacao){
         try{
-            return ResponseEntity.ok(cs.realizarPix(transacao));
+            return ResponseEntity.ok(transacaoService.realizarPix(transacao));
         } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
-        
         }
     }
-
 }

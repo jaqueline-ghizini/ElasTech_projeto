@@ -1,5 +1,6 @@
 package codingDreams.service;
 
+import codingDreams.exceptions.VerificacaoSistemaException;
 import codingDreams.model.ContaBancaria;
 import codingDreams.model.Endereco;
 import codingDreams.model.PessoaJuridica;
@@ -72,7 +73,7 @@ public class PessoaJuridicaService {
         return pessoaJuridica;
     }
 
-    public PessoaJuridica realizarAlteracaoPJ(PessoaJuridica pessoaJuridica) {
+    public PessoaJuridica realizarAlteracaoPJ(PessoaJuridica pessoaJuridica) throws VerificacaoSistemaException{
 
         Endereco endereco = enderecoRepository.save(pessoaJuridica.getEndereco());
         pessoaJuridica.setEndereco(endereco);
@@ -82,7 +83,17 @@ public class PessoaJuridicaService {
        //ao inativar cliente, automaticamente inativa a conta
         if (pessoaJuridica.getStatusCliente() == false){
             //verificar se o saldo está zerado antes
-            conta.setStatusConta(false);
+            double saldo = conta.getSaldo();
+
+            if(saldo==0){
+                //verificar se o saldo está zerado antes, se não ele não deixa cancelar
+                conta.setStatusConta(false);
+            }else{
+                conta.setStatusConta(true);
+                pessoaJuridica.setStatusCliente(true);
+
+                throw new VerificacaoSistemaException("Não é possível cancelar a conta, pois ainda tem saldo.");
+            }
         }
 
         int tipoChavePix =  conta.getTipoChavePix();//pega um int que difere qual tipo de chave pix será cadastrada

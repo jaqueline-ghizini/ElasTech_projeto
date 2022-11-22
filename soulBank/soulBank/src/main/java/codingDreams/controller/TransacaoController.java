@@ -1,6 +1,6 @@
 package codingDreams.controller;
 
-import codingDreams.exceptions.RegistroBancoException;
+import codingDreams.exceptions.VerificacaoSistemaException;
 import codingDreams.model.Transacao;
 import codingDreams.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class TransacaoController {
     public ResponseEntity realizarDeposito(@RequestBody Transacao transacao){
       try{
           return ResponseEntity.ok(cs.realizarDeposito(transacao));
-      } catch(RegistroBancoException e){
+      } catch(VerificacaoSistemaException e){
           return ResponseEntity
                   .status(HttpStatus.NOT_FOUND)
                   .body(e.getMessage());
@@ -55,7 +55,7 @@ public class TransacaoController {
     public ResponseEntity realizarSaque(@RequestBody Transacao transacao){
        try{
             return ResponseEntity.ok(cs.realizarSaque(transacao));
-        } catch(RegistroBancoException e){
+        } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
@@ -67,7 +67,7 @@ public class TransacaoController {
     public ResponseEntity realizarTransferencia(@RequestBody Transacao transacao){
         try{
             return ResponseEntity.ok(cs.realizarTransferencia(transacao));
-        } catch(RegistroBancoException e){
+        } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
@@ -78,7 +78,7 @@ public class TransacaoController {
     public ResponseEntity realizarPix(@RequestBody Transacao transacao){
         try{
             return ResponseEntity.ok(cs.realizarPix(transacao));
-        } catch(RegistroBancoException e){
+        } catch(VerificacaoSistemaException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());

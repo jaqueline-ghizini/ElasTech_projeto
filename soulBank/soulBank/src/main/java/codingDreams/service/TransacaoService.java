@@ -1,6 +1,6 @@
 package codingDreams.service;
 
-import codingDreams.exceptions.RegistroBancoException;
+import codingDreams.exceptions.VerificacaoSistemaException;
 import codingDreams.model.ContaBancaria;
 import codingDreams.model.Transacao;
 import codingDreams.repository.ContaBancariaRepository;
@@ -29,11 +29,11 @@ public class TransacaoService {
         return transacaoRepository.findById(idTransacao);
     }
 
-    public Transacao realizarDeposito(Transacao transacao) throws RegistroBancoException{
+    public Transacao realizarDeposito(Transacao transacao) throws VerificacaoSistemaException {
 
             ContaBancaria contaDestino = contaBancariaRepository.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
            if(contaDestino==null){
-               throw new RegistroBancoException("Conta Destino não encontrada");
+               throw new VerificacaoSistemaException("Conta Destino não encontrada");
            }
 
             transacao.setDataTransacao(new Date());
@@ -55,10 +55,10 @@ public class TransacaoService {
 
     }
 
-    public Transacao realizarSaque(Transacao transacao) throws RegistroBancoException{
+    public Transacao realizarSaque(Transacao transacao) throws VerificacaoSistemaException {
         ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
-            throw new RegistroBancoException("Conta Origem não encontrada");
+            throw new VerificacaoSistemaException("Conta Origem não encontrada");
         }
         transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
@@ -77,24 +77,24 @@ public class TransacaoService {
         contaBancariaRepository.save(contaOrigem);
 
     }else {
-        throw new RegistroBancoException("Saldo insuficiente para realizar o saque");
+        throw new VerificacaoSistemaException("Saldo insuficiente para realizar o saque");
     }
         transacao.setContaOrigem(contaOrigem);
         transacao.setTipoTransacao("Saque");
         return transacaoRepository.save(transacao);
     }
 
-    public Transacao realizarTransferencia(Transacao transacao) throws RegistroBancoException {
+    public Transacao realizarTransferencia(Transacao transacao) throws VerificacaoSistemaException {
         ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
-           throw new RegistroBancoException("Conta Origem não encontrada");
+           throw new VerificacaoSistemaException("Conta Origem não encontrada");
         }
         transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
 
         ContaBancaria contaDestino = contaBancariaRepository.findByContaAndAgencia(transacao.getContaDestino().getConta(), transacao.getContaDestino().getAgencia());
         if(contaDestino==null){
-            throw new RegistroBancoException("Conta Destino não encontrada");
+            throw new VerificacaoSistemaException("Conta Destino não encontrada");
        }
         transacao.setContaDestino(contaDestino);
 
@@ -115,7 +115,7 @@ public class TransacaoService {
             contaDestino.setSaldo(saldoDestino);
             contaBancariaRepository.save(contaDestino);
         }else {
-            throw new RegistroBancoException("Saldo insuficiente para realizar a transação");
+            throw new VerificacaoSistemaException("Saldo insuficiente para realizar a transação");
         }
 
         transacao.setContaOrigem(contaOrigem);
@@ -124,17 +124,17 @@ public class TransacaoService {
         return transacaoRepository.save(transacao);
     }
 
-    public Transacao realizarPix(Transacao transacao) throws RegistroBancoException{
+    public Transacao realizarPix(Transacao transacao) throws VerificacaoSistemaException {
         ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(),transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
-            throw new RegistroBancoException("Conta Origem não encontrada");
+            throw new VerificacaoSistemaException("Conta Origem não encontrada");
          }
         transacao.setDataTransacao(new Date());
         transacao.setContaOrigem(contaOrigem);
       
         ContaBancaria contaDestino = contaBancariaRepository.findByChavePix(transacao.getContaDestino().getChavePix());
         if(contaDestino==null){
-             throw new RegistroBancoException("Conta Destino não encontrada");
+             throw new VerificacaoSistemaException("Conta Destino não encontrada");
         }
         transacao.setContaDestino(contaDestino);
 
@@ -157,7 +157,7 @@ public class TransacaoService {
             contaBancariaRepository.save(contaDestino);
 
          }else {
-            throw new RegistroBancoException("Saldo insuficiente para realizar a transação");
+            throw new VerificacaoSistemaException("Saldo insuficiente para realizar a transação");
         }
 
         transacao.setContaOrigem(contaOrigem);

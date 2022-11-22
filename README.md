@@ -117,15 +117,15 @@ Se você deseja baixar editar e/ou executar esse sistema, é preciso ter:
 
 Projeto elaborado por:
 
-<a href="https://github.com/jaqueline-ghizini">Jaqueline Ghizini</a>
+<a href="https://github.com/jaqueline-ghizini" target="_blank">Jaqueline Ghizini</a>
 
-<a href="https://github.com/gizele233">Gizele Rodrigues</a>
+<a href="https://github.com/gizele233" target="_blank">Gizele Rodrigues</a>
 
-<a href="https://github.com/Bruna-Quinto-Marsiaj">Bruna Quinto</a>
+<a href="https://github.com/Bruna-Quinto-Marsiaj" target="_blank">Bruna Quinto</a>
 
-<a href="https://github.com/srhgeorgia.Projeto">Sarah de Oliveira</a>
+<a href="https://github.com/srhgeorgia" target="_blank">Sarah de Oliveira</a>
 
-<a href="https://github.com/priscilagf">Priscila Gallo</a>
+<a href="https://github.com/priscilagf" target="_blank">Priscila Gallo</a>
 
-<a href="https://github.com/SamantaBarrosC">Samanta Barros</a>
+<a href="https://github.com/SamantaBarrosC" target="_blank">Samanta Barros</a>
 

@@ -56,7 +56,7 @@ As entidades Pesssoa Física e Jurídica do Banco de Dados não tem uma relaçã
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> Diagrama de Classe ##
 
 Diagrama UML.
-
+![DiagramaClasseUML-final](https://user-images.githubusercontent.com/36826625/203415962-ff65916a-cc80-4321-b56e-8fa6d72ce604.png)
 
 <br><br>
 

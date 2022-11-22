@@ -1,5 +1,5 @@
 #Projeto ElasTech
-# ElasTech Projeto - SoulBanck #
+# ElasTech Projeto - SoulBank #
 ## Grupo CodingDreams - Desafio final - Banco Fictício ##
 
     Documentação técnica, por meio de um arquivo readme.md, do projeto do Programa ElasTech, com a criação de um sistema de Cadastro de Conta Bancária, Cliente e realização de Transações.
@@ -39,11 +39,19 @@ As entidades Pesssoa Física e Jurídica do Banco de Dados não tem uma relaçã
 <br><br>
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> Casos de Uso do Sistema ##
-+ Cliente
-- Transação...
-
-
++ Cadastro de cliente
 <br><br>
+![CadastrarCliente](https://user-images.githubusercontent.com/36826625/203323013-1d16d0b4-113f-4810-bdfd-12ad538ebd74.png)
+
++ Buscar cliente cadastrado
+<br><br>
+![BuscarClienteCadastrado](https://user-images.githubusercontent.com/36826625/203323775-89718da4-2774-425c-9e4e-a4e79d2c03ea.png)
+
++ Transferência de saldo entre contas
+![TransferenciadeSaldoEntreContas](https://user-images.githubusercontent.com/36826625/203324536-fa1025f2-f449-47a4-951b-dd10a510f412.png)
+
++ Buscar histórico de transações entre contas
+![BuscarHistoricodeTransacaoentreContas](https://user-images.githubusercontent.com/36826625/203325623-65cc41ba-46a5-4ce5-b41e-88e33575f53a.png)
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> Diagrama de Classe ##
 
@@ -55,6 +63,8 @@ Diagrama UML.
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> DER ##
 
 Diagrama de Entidade e Relacionamento do Banco de Dados.
+
+![DER](https://user-images.githubusercontent.com/36826625/203319946-3bfd116c-8093-432b-a446-d983bad2561a.png)
 
 <br><br>
 

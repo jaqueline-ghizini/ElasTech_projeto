@@ -45,7 +45,7 @@ public class Endereco {
         return Objects.hash(idEndereco);
     }
 
-    public Endereco(Long IdEndereço, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
+    public Endereco(Long IdEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.complemento = complemento;

@@ -37,7 +37,7 @@ public class ContaBancaria  {
     public ContaBancaria(){
         //construtor vazio pra teste, ao criar objeto utilizar set
     }
-    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean chequeEspecial, String chavePix, List historicoOrigem, List historicoDestino, boolean statusConta) {
+    public ContaBancaria(Long idConta, String conta, String agencia, double saldo, double limite, boolean chequeEspecial, String chavePix, int tipoChavePix, List historicoOrigem, List historicoDestino, boolean statusConta) {
         this.idConta = idConta;
         this.conta = conta;
         this.agencia = agencia;

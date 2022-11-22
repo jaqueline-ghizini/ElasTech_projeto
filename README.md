@@ -115,5 +115,17 @@ Se você deseja baixar editar e/ou executar esse sistema, é preciso ter:
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/fluency/48/000000/handshake.png" /> Contribuidores ##
 
-Projeto elaborado por: https://github.com/Bruna-Quinto-Marsiaj,  https://github.com/gizele233, https://github.com/jaqueline-ghizini,  https://github.com/priscilagf, https://github.com/SamantaBarrosC, https://github.com/srhgeorgia.Projeto 
+Projeto elaborado por:
+
+<a href="https://github.com/jaqueline-ghizini">Jaqueline Ghizini</a>
+
+<a href="https://github.com/gizele233">Gizele Rodrigues</a>
+
+<a href="https://github.com/Bruna-Quinto-Marsiaj">Bruna Quinto</a>
+
+<a href="https://github.com/srhgeorgia.Projeto">Sarah de Oliveira</a>
+
+<a href="https://github.com/priscilagf">Priscila Gallo</a>
+
+<a href="https://github.com/SamantaBarrosC">Samanta Barros</a>
 

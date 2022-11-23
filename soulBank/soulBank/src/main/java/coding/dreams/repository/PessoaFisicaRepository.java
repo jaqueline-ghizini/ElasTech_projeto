@@ -1,7 +1,7 @@
-package codingDreams.repository;
+package coding.dreams.repository;
 
 
-import codingDreams.model.PessoaFisica;
+import coding.dreams.model.PessoaFisica;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica,String> {

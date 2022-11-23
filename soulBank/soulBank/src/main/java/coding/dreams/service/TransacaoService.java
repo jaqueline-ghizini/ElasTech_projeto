@@ -1,10 +1,10 @@
-package codingDreams.service;
+package coding.dreams.service;
 
-import codingDreams.exceptions.VerificacaoSistemaException;
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Transacao;
-import codingDreams.repository.ContaBancariaRepository;
-import codingDreams.repository.TransacaoRepository;
+import coding.dreams.model.Transacao;
+import coding.dreams.repository.TransacaoRepository;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.repository.ContaBancariaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -134,7 +134,7 @@ public class TransacaoService {
       
         ContaBancaria contaDestino = contaBancariaRepository.findByChavePix(transacao.getContaDestino().getChavePix());
         if(contaDestino==null){
-             throw new VerificacaoSistemaException("Conta Destino não encontrada");
+             throw new VerificacaoSistemaException("Chave Pix não encontrada.");
         }
         transacao.setContaDestino(contaDestino);
 

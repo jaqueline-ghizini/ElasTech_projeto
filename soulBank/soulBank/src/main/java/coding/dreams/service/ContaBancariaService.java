@@ -1,10 +1,13 @@
-package codingDreams.service;
+package coding.dreams.service;
 
-import codingDreams.model.ContaBancaria;
-import codingDreams.repository.ContaBancariaRepository;
+import coding.dreams.model.Transacao;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.repository.ContaBancariaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContaBancariaService {
@@ -29,5 +32,11 @@ public class ContaBancariaService {
             contaBancaria.setLimite(valorLimite);
        }
             return contaBancariaRepository.save(contaBancaria);
+    }
+
+    public List<Transacao> consultarHistoricoTransacaoPorConta(String conta, String agencia) {
+        ContaBancaria contaBancaria = contaBancariaRepository.findByContaAndAgencia(conta, agencia);
+        contaBancaria.getHistoricoDestino().addAll(contaBancaria.getHistoricoOrigem());
+       return contaBancaria.getHistoricoDestino();
     }
 }

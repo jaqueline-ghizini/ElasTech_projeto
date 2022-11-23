@@ -1,11 +1,12 @@
-package codingDreams.service;
+package coding.dreams.service;
 
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Endereco;
-import codingDreams.model.PessoaJuridica;
-import codingDreams.repository.ContaBancariaRepository;
-import codingDreams.repository.EnderecoRepository;
-import codingDreams.repository.PessoaJuridicaRepository;
+import coding.dreams.repository.PessoaJuridicaRepository;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.model.Endereco;
+import coding.dreams.model.PessoaJuridica;
+import coding.dreams.repository.ContaBancariaRepository;
+import coding.dreams.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +73,7 @@ public class PessoaJuridicaService {
         return pessoaJuridica;
     }
 
-    public PessoaJuridica realizarAlteracaoPJ(PessoaJuridica pessoaJuridica) {
+    public PessoaJuridica realizarAlteracaoPJ(PessoaJuridica pessoaJuridica) throws VerificacaoSistemaException{
 
         Endereco endereco = enderecoRepository.save(pessoaJuridica.getEndereco());
         pessoaJuridica.setEndereco(endereco);
@@ -82,7 +83,17 @@ public class PessoaJuridicaService {
        //ao inativar cliente, automaticamente inativa a conta
         if (pessoaJuridica.getStatusCliente() == false){
             //verificar se o saldo está zerado antes
-            conta.setStatusConta(false);
+            double saldo = conta.getSaldo();
+
+            if(saldo==0){
+                //verificar se o saldo está zerado antes, se não ele não deixa cancelar
+                conta.setStatusConta(false);
+            }else{
+                conta.setStatusConta(true);
+                pessoaJuridica.setStatusCliente(true);
+
+                throw new VerificacaoSistemaException("Não é possível cancelar a conta, pois ainda tem saldo.");
+            }
         }
 
         int tipoChavePix =  conta.getTipoChavePix();//pega um int que difere qual tipo de chave pix será cadastrada

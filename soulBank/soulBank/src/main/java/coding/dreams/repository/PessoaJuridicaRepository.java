@@ -1,6 +1,6 @@
-package codingDreams.repository;
+package coding.dreams.repository;
 
-import codingDreams.model.PessoaJuridica;
+import coding.dreams.model.PessoaJuridica;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaJuridicaRepository extends JpaRepository<PessoaJuridica,String> {

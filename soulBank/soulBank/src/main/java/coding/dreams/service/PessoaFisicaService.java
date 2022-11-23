@@ -1,15 +1,14 @@
-package codingDreams.service;
+package coding.dreams.service;
 
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Endereco;
-import codingDreams.model.PessoaFisica;
-import codingDreams.repository.ContaBancariaRepository;
-import codingDreams.repository.EnderecoRepository;
-import codingDreams.repository.PessoaFisicaRepository;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.model.PessoaFisica;
+import coding.dreams.repository.PessoaFisicaRepository;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.Endereco;
+import coding.dreams.repository.ContaBancariaRepository;
+import coding.dreams.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -74,7 +73,7 @@ public class PessoaFisicaService {
         return pessoaFisica;
     }
 
-    public PessoaFisica realizarAlteracaoPF(PessoaFisica pessoaFisica) {
+    public PessoaFisica realizarAlteracaoPF(PessoaFisica pessoaFisica) throws VerificacaoSistemaException {
         Endereco endereco = enderecoRepository.save(pessoaFisica.getEndereco());
         pessoaFisica.setEndereco(endereco);
 
@@ -83,8 +82,17 @@ public class PessoaFisicaService {
         //para a realização do soft delete será alterado o status da conta de ativa para inativa
         //ao inativar cliente, automaticamente inativa a conta
         if (pessoaFisica.getStatusCliente() == false){
-            //verificar se o saldo está zerado antes
-            conta.setStatusConta(false);
+            double saldo = conta.getSaldo();
+
+            if(saldo==0){
+                //verificar se o saldo está zerado antes, se não ele não deixa cancelar
+                conta.setStatusConta(false);
+            }else{
+                conta.setStatusConta(true);
+                pessoaFisica.setStatusCliente(true);
+
+                throw new VerificacaoSistemaException("Não é possível cancelar a conta, pois ainda tem saldo.");
+            }
         }
 
         //verificação de chave

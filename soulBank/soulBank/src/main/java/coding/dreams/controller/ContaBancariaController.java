@@ -19,7 +19,8 @@ public class ContaBancariaController {
         @Autowired
         private ContaBancariaService contaBancariaService;
 
-        @GetMapping("/consultarconta/{conta}/{agencia}")//pesquisa conta não pelo id, mas pela conta e agência
+        //pesquisar conta não pelo id, mas pela conta e agência que é mais usual
+        @GetMapping("/consultarconta/{conta}/{agencia}")
         public ResponseEntity<?> realizarConsultaConta(@PathVariable String conta, @PathVariable String agencia){
             
             ContaBancaria contaBancaria = contaBancariaService.realizarConsultaConta(conta, agencia);
@@ -40,7 +41,7 @@ public class ContaBancariaController {
 
         //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.
         //  Também tem SoftDelete, ou seja os dados não serão perdidos.
-        //  A conta pode ser alterada entre comum e especial.
+        //  A conta pode ser alterada entre ter cheque Especial e não ter.
         //  A conta só é inativada juntamente com o cliente.
         @PutMapping
         public ResponseEntity<ContaBancaria> realizarAlteracaoConta(@RequestBody ContaBancaria contaBancaria){

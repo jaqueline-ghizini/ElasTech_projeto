@@ -91,5 +91,4 @@ public class Transacao{
     public String toString() {
 		return this.idTransacao + "/" + this.valor + "/"  + this.tipoTransacao + "/" +this.dataTransacao+ "/" +contaOrigem.toString()+"/" + contaDestino.toString();
     }
-
 }

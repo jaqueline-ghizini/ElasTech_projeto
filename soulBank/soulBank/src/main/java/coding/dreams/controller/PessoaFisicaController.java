@@ -17,7 +17,7 @@ public class PessoaFisicaController {
     @Autowired
     private PessoaFisicaService pessoaFisicaService;
 
-    @GetMapping("/consultapf/{cpf}")
+    @GetMapping("/consultapf/{cpf}") // Decidimos fazer o cliente sem ID automático e declaramos o CPF como ID
     public ResponseEntity<?> realizarConsultaPF(@PathVariable String cpf){
 
         Optional<PessoaFisica> opcao = pessoaFisicaService.realizarConsultaPF(cpf);
@@ -28,7 +28,7 @@ public class PessoaFisicaController {
         return new ResponseEntity<>("Cliente não encontrado.",HttpStatus.NOT_FOUND);
     }
     
-    @PostMapping
+    @PostMapping //Cadastra e altera endereço e conta bancária junto
     public ResponseEntity<PessoaFisica> cadastrarPF(@RequestBody PessoaFisica pessoaFisica){
         return ResponseEntity.ok(pessoaFisicaService.cadastrarPF(pessoaFisica));
     }

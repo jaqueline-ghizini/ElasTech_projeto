@@ -67,7 +67,7 @@ public class TransacaoController {
         }
     }
 
-    @PostMapping("/pix")
+    @PostMapping("/pix") //Como diferencial inclumos a transação por pix, incluindo a geração automática de chave aleatória criada junto na cadastro de pessoa
     public ResponseEntity realizarPix(@RequestBody Transacao transacao){
         try{
             return ResponseEntity.ok(transacaoService.realizarPix(transacao));

@@ -48,5 +48,8 @@ insert into pessoa_juridica(cnpj,email,status_cliente,telefone,razao_social,cont
 ("02.014.753/0001-50","docesluna@pags.com",true,"021 5519-8569","luna doces",20,25),
 ("03.072.822/0001-60","papellumina@pags.com",true,"021 5023-8569","papelaria lumina",21,26);
 
+-- para dar certo o hybernate tem que mudar a configuração do Safe. Ir no Edit > preferences > sql editor, no fim da pag desabilitar a opção safe update.
+select * from hibernate_sequence;
+update hibernate_sequence set next_val = next_val + 18; -- para acertar o numero do hibernate após colocar os inserts. Basta consultar que numero está e somar até chegar no 27 
 
 

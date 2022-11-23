@@ -14,7 +14,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue
-    private Long idEndereco; //só get pq vai ser só pra consulta
+    private Long idEndereco;
     private String logradouro;
     private String complemento;
     private String bairro;
@@ -30,8 +30,6 @@ public class Endereco {
     @JsonIgnore
     private Collection pessoaJuridica;
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,7 +43,7 @@ public class Endereco {
         return Objects.hash(idEndereco);
     }
 
-    public Endereco(Long IdEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
+    public Endereco(Long idEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.complemento = complemento;
@@ -55,7 +53,6 @@ public class Endereco {
         this.cep = cep;
         this.pessoaFisica=pessoaFisica;
         this.pessoaJuridica= pessoaJuridica;
-
     }
     public Endereco(){
 

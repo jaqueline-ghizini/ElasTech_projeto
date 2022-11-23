@@ -65,7 +65,6 @@ public class PessoaJuridicaService {
                 conta.setChavePix(null);
                 break;
         }
-        //contaBancariaRepository.save(conta);
         pessoaJuridica.setContaBancaria(conta);
 
         pessoaJuridica = pessoaJuridicaRepository.save(pessoaJuridica);
@@ -123,7 +122,7 @@ public class PessoaJuridicaService {
                 conta.setChavePix(null);
                 break;
         }
-        //contaBancariaRepository.save(conta);
+
         pessoaJuridica.setContaBancaria(conta);
 
         return pessoaJuridicaRepository.save(pessoaJuridica);

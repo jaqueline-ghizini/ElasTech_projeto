@@ -29,7 +29,7 @@ public class PessoaFisicaController {
     }
     
     @PostMapping
-    public ResponseEntity<PessoaFisica> cadastrarPF(@RequestBody PessoaFisica pessoaFisica){ // Observação a ser excluida: ser for testar sem ter o banco ainda, alterar o metodo com o valor de retorno e também o return
+    public ResponseEntity<PessoaFisica> cadastrarPF(@RequestBody PessoaFisica pessoaFisica){
         return ResponseEntity.ok(pessoaFisicaService.cadastrarPF(pessoaFisica));
     }
     @PutMapping

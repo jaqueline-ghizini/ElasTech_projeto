@@ -65,9 +65,7 @@ public class PessoaFisicaService {
             break;
         }
 
-        //contaBancariaRepository.save(conta);
         pessoaFisica.setContaBancaria(conta);
-
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);//ao cadastrar, pegar a alternativa do cliente de qual dado usar (cpf/cnpj, telefone, email), e cadastrar no banco de dados esse dado
                          
         return pessoaFisica;
@@ -124,7 +122,6 @@ public class PessoaFisicaService {
                 break;
         }
 
-        //contaBancariaRepository.save(conta);// for por findby
         pessoaFisica.setContaBancaria(conta);
         return pessoaFisicaRepository.save(pessoaFisica);
     }

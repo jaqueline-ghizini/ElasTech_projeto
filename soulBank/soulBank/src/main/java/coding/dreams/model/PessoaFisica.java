@@ -14,7 +14,7 @@ public class PessoaFisica extends Cliente{
     private String rg;
     private String nome;
     @ManyToOne @JoinColumn(name="idEndereco")
-    private Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado//
+    private Endereco endereco; //preferimos fazer em classe separada para ficar melhor estruturado
     @OneToOne
     private ContaBancaria contaBancaria;
 
@@ -67,11 +67,9 @@ public class PessoaFisica extends Cliente{
         this.nome = nome;
     }
 
-
     public Endereco getEndereco() {
         return endereco;
     }
-
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;

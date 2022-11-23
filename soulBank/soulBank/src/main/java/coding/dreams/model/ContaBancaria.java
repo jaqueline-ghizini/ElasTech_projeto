@@ -14,7 +14,7 @@ public class ContaBancaria  {
     private Long idConta;
     //descidimos colocar como unique dados importantes que são unicos pra cada conta e também a chave
     //é possível fazer consulta por conta e agencia
-    //@Column(unique=true)
+
     private String conta;
     private String agencia;
     private double saldo;
@@ -30,9 +30,9 @@ public class ContaBancaria  {
 
     @OneToMany (mappedBy="contaDestino", targetEntity=Transacao.class)
     @JsonIgnore
-    private List <Transacao> historicoDestino;// explicar pq não utlizamos ManyToMany
-
-
+    private List <Transacao> historicoDestino;
+    //Descidimos que uma maneira de criar um banco de dados claro e objetivo, seria utilizar a relação OneToMany e acrescentar dois campos de conta em transação.
+    //Assim seria possóvel consultar o Histórico de Transação por conta, e registrar as contas envolvidas na transação.
 
     public ContaBancaria(){
         //construtor vazio pra teste, ao criar objeto utilizar set
@@ -140,16 +140,5 @@ public class ContaBancaria  {
     @Override
     public String toString() {
 		return this.conta + "/" + this.agencia + "/" + this.saldo + "/" + this.limite + "/" + this.chequeEspecial + "/" + this.chavePix + "/" + this.statusConta;
-    
     }
-
-/*
-    public List<Transacao> consultarOrigem() { //checar cami
-        return this.historicoOrigem; //vamos falar com a Cami
-    }
-
-    public List<Transacao> consultarDestino() { //checar cami
-        return this.historicoDestino; //vamos falar com a Cami
-    }
-*/
 }

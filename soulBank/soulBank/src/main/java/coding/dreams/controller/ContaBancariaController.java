@@ -39,7 +39,6 @@ public class ContaBancariaController {
                 return ResponseEntity.ok(trasacao);
         }
 
-        //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.
         //  Também tem SoftDelete, ou seja os dados não serão perdidos.
         //  A conta pode ser alterada entre ter cheque Especial e não ter.
         //  A conta só é inativada juntamente com o cliente.

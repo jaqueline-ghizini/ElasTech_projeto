@@ -17,7 +17,7 @@ public class PessoaJuridicaController {
     @Autowired
     private PessoaJuridicaService pessoaJuridicaService;
 
-    @GetMapping("/consultarpj/{cnpj}")
+    @GetMapping("/consultarpj/{cnpj}") // Decidimos fazer o cliente sem ID automático e declaramos o CNPJ como ID
     public ResponseEntity<?> realizarConsultaPJ(@PathVariable String cnpj ){
 
         Optional<PessoaJuridica> opcao = pessoaJuridicaService.realizarConsultaPJ(cnpj);
@@ -28,7 +28,7 @@ public class PessoaJuridicaController {
         return new ResponseEntity<>("Cliente não encontrado.",HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
+    @PostMapping //Cadastra e altera endereço e conta bancária junto
     public ResponseEntity<PessoaJuridica> cadastrarPJ(@RequestBody PessoaJuridica pessoaJuridica){
         return ResponseEntity.ok(pessoaJuridicaService.cadastrarPJ(pessoaJuridica));
     }

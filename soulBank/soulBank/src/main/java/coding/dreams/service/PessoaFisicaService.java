@@ -1,16 +1,14 @@
-package codingDreams.service;
+package coding.dreams.service;
 
-import codingDreams.exceptions.VerificacaoSistemaException;
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Endereco;
-import codingDreams.model.PessoaFisica;
-import codingDreams.repository.ContaBancariaRepository;
-import codingDreams.repository.EnderecoRepository;
-import codingDreams.repository.PessoaFisicaRepository;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.model.PessoaFisica;
+import coding.dreams.repository.PessoaFisicaRepository;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.Endereco;
+import coding.dreams.repository.ContaBancariaRepository;
+import coding.dreams.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import java.util.Optional;
 import java.util.UUID;

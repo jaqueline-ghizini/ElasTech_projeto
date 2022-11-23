@@ -1,8 +1,8 @@
-package codingDreams.controller;
+package coding.dreams.controller;
 
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Transacao;
-import codingDreams.service.ContaBancariaService;
+import coding.dreams.model.ContaBancaria;
+import coding.dreams.model.Transacao;
+import coding.dreams.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,19 +30,13 @@ public class ContaBancariaController {
             return new ResponseEntity<>("Conta Bancária não encontrada.",HttpStatus.NOT_FOUND);
         }
 
-        /*@GetMapping("/consultarconta/{conta}/{agencia}")//historico de transação
-        public ResponseEntity<List<?>> consultarHistoricoTransacaoPorConta(@PathVariable String conta, @PathVariable String agencia){
+        @GetMapping("/consultarhistorico/{conta}/{agencia}")//historico de transação
+        public ResponseEntity<List<Transacao>> consultarHistoricoTransacaoPorConta(@PathVariable String conta, @PathVariable String agencia){
 
-            ContaBancaria contaBancaria = contaBancariaService.consultarHistoricoTransacaoPorConta(conta, agencia);
+            List<Transacao> trasacao = contaBancariaService.consultarHistoricoTransacaoPorConta(conta, agencia);
 
-            List historico = contaBancaria.getHistoricoDestino(contaBancaria.getConta());
-
-            if(contaBancaria != null){
-
-                return ResponseEntity.ok();
-            }
-            return new ResponseEntity<>("Conta Bancária não encontrada",HttpStatus.NOT_FOUND);
-        }*/
+                return ResponseEntity.ok(trasacao);
+        }
 
         //  Só tem alteração e não tem cadastro pois é cadastrado juntamente com o cliente.
         //  Também tem SoftDelete, ou seja os dados não serão perdidos.

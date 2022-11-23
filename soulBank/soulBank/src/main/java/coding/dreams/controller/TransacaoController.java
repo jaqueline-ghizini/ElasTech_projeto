@@ -1,9 +1,8 @@
-package codingDreams.controller;
+package coding.dreams.controller;
 
-import codingDreams.exceptions.VerificacaoSistemaException;
-import codingDreams.model.ContaBancaria;
-import codingDreams.model.Transacao;
-import codingDreams.service.TransacaoService;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.Transacao;
+import coding.dreams.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

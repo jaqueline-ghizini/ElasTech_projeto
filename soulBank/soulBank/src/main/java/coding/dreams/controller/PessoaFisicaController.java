@@ -1,8 +1,8 @@
-package codingDreams.controller;
+package coding.dreams.controller;
 
-import codingDreams.exceptions.VerificacaoSistemaException;
-import codingDreams.model.PessoaFisica;
-import codingDreams.service.PessoaFisicaService;
+import coding.dreams.exceptions.VerificacaoSistemaException;
+import coding.dreams.model.PessoaFisica;
+import coding.dreams.service.PessoaFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

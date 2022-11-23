@@ -1,7 +1,7 @@
-package codingDreams.repository;
+package coding.dreams.repository;
 
 
-import codingDreams.model.ContaBancaria;
+import coding.dreams.model.ContaBancaria;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

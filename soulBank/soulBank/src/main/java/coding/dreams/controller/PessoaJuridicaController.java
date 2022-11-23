@@ -1,8 +1,8 @@
-package codingDreams.controller;
+package coding.dreams.controller;
 
-import codingDreams.exceptions.VerificacaoSistemaException;
-import codingDreams.model.PessoaJuridica;
-import codingDreams.service.PessoaJuridicaService;
+import coding.dreams.model.PessoaJuridica;
+import coding.dreams.service.PessoaJuridicaService;
+import coding.dreams.exceptions.VerificacaoSistemaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

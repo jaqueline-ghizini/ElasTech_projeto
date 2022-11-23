@@ -1,6 +1,6 @@
-package codingDreams.repository;
+package coding.dreams.repository;
 
-import codingDreams.model.Endereco;
+import coding.dreams.model.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {

@@ -1,6 +1,6 @@
-package codingDreams.repository;
+package coding.dreams.repository;
 
-import codingDreams.model.Transacao;
+import coding.dreams.model.Transacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransacaoRepository extends JpaRepository<Transacao, Long> {

@@ -1,4 +1,4 @@
-package codingDreams.model;
+package coding.dreams.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

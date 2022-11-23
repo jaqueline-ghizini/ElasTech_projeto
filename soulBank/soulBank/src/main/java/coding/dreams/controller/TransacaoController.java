@@ -18,17 +18,7 @@ public class TransacaoController {
     @Autowired
     private TransacaoService transacaoService;
 
-  /*  @GetMapping("/consultarhistorico/{conta}/{agencia}")
-    public ResponseEntity<List<Transacao>> consultarHistorico(@PathVariable String conta, @PathVariable String agencia){
-        ContaBancaria contaBancaria = cs.consultarHistorico(conta, agencia);
-
-        if(contaBancaria != null){
-            return ResponseEntity.ok(cs.consultarHistorico());
-        }
-        return new ResponseEntity<>("Conta Bancária não encontrada",HttpStatus.NOT_FOUND);
-    }*/
-
-    @GetMapping("/consultarhistorico")
+    @GetMapping("/consultarhistoricogeral")
     public ResponseEntity<List<Transacao>> consultarHistorico(){
             return ResponseEntity.ok(transacaoService.consultarHistorico());
     }

@@ -30,7 +30,7 @@ public class ContaBancariaController {
             return new ResponseEntity<>("Conta Bancária não encontrada.",HttpStatus.NOT_FOUND);
         }
 
-        @GetMapping("/consultarhistorico/{conta}/{agencia}")//historico de transação
+        @GetMapping("/consultarhistoricotransacao/{conta}/{agencia}")//historico de transação
         public ResponseEntity<List<Transacao>> consultarHistoricoTransacaoPorConta(@PathVariable String conta, @PathVariable String agencia){
 
             List<Transacao> trasacao = contaBancariaService.consultarHistoricoTransacaoPorConta(conta, agencia);

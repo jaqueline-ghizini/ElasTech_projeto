@@ -14,7 +14,6 @@ ___
 ##  <img align="center" alt="Jaque-Csharp" height="45" width="30" src="https://www.vectorlogo.zone/logos/java/java-vertical.svg"> Tecnologias Utilizadas ##
 Foram escolhidas para esse projeto:
 + Linguagem Java. Por ser uma linguagem de alto nível e orientada a objeto.
-- Lombok. Para adicionar Annotations.
 + Spring Boot. Pela facilidade e agilidade em processos de aplicações Java. Importamos algumas dependências como Actuator e Web.
 - Spring Boot JPA. Por criar uma camada de acesso aos dados por meio de uma API.
 + H2. Utilizamos inicialmente para gerar uma Base de Dados simples para testes de Caso de Uso das Entidades.
@@ -69,32 +68,16 @@ Diagrama de Entidade e Relacionamento do Banco de Dados.
 <br><br>
 
 
-## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> Endpoints Swagger ##
-
-+ Pessoa Física
-<br><br>
-- Pessoa Jurídica
-<br><br>
-+ Conta Bancária
-<br><br>
-- Transação
-<br><br>
-
-## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/note.png" /> Prints de Testes ##
-
-Print tal...
-
-<br><br>
-
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" /> Pré-requisitos de Instalação ##
 
 Se você deseja baixar editar e/ou executar esse sistema, é preciso ter:
 - JDK 8
 + Java 8
 - IntelliJ ou IDE da sua preferência
-+ MySQL Workbench*
++ MySQL
 - Git
 + Acesso ao GitHub
+
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/fluency/48/000000/run-command.png" /> Execução da Aplicação ##
 
@@ -113,16 +96,13 @@ Se você deseja baixar editar e/ou executar esse sistema, é preciso ter:
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/color/48/000000/error--v1.png" /> Possíveis implementações futuras ##
 
-+ Spring Security.
-- Autenticação Oauth.
-+ Ao invés de termos criado o atributo chave pix para receber o dado duplicado da informação do cliente, ele poderia escolher a chave pix na transação, além ter a opção de múltiplas chaves.
-- Fizemos a relação de Pessoa Física e Pessoa Jurídica como herança para poder praticar herança no projeto, porém descobrimos que na prática não é feito com herança.*
-+ Criação de Front-End por meio de console.
-- Melhorar o código para ficar mais limpo, ex: aplicação das annotations dos getters and setters e dos construtores.
-+ Botar mais regras de negócio para a API do Banco se parecer mais com a realidade*
-- Pagamento via boleto
-+ Mudar a relação de Cliente e Conta para @ManyToMany.
-- Melhorar a estrutura do Banco para ter mais diversidade de tipos de Clientes.
++ Spring Security: autenticação e autorização (OAuth 2.0).
+- Criação de Front-End por meio de console.
++ Código Limpo: Sonar.
+- Melhorar a API do Banco se parecer mais com a realidade.
++ Java Dot.
+
+
 
 ## <img align="center" alt="Jaque-vscode" height="30" width="30" src="https://img.icons8.com/fluency/48/000000/handshake.png" /> Contribuidores ##
 

@@ -71,7 +71,7 @@ public class PessoaJuridica extends Cliente {
         this.contaBancaria = contaBancaria;
     }
 
-    public String consultarCliente(){ //ver como botar endereço nas pessoas
+    public String consultarCliente(){
         return super.email+"/"+super.telefone+"/"+ super.statusCliente + "/" + this.cnpj+"/"+this.razaoSocial+"/"+this.endereco.toString()+"/"+this.contaBancaria.toString();
     }
 }

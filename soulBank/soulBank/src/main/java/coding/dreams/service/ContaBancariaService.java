@@ -19,7 +19,7 @@ public class ContaBancariaService {
     }
 
     public ContaBancaria realizarAlteracaoConta(ContaBancaria contaBancaria) {
-        if (contaBancaria.getChequeEspecial() == false) {
+        if (contaBancaria.getChequeEspecial() == false) {// se no cadastro não for adcionado o limite de cheque especial o sistema automaticamente coloca o valor 0.00
             Double valorLimite = 0.00;
             contaBancaria.setLimite(valorLimite);
         }
@@ -34,7 +34,7 @@ public class ContaBancariaService {
             return contaBancariaRepository.save(contaBancaria);
     }
 
-    public List<Transacao> consultarHistoricoTransacaoPorConta(String conta, String agencia) {
+    public List<Transacao> consultarHistoricoTransacaoPorConta(String conta, String agencia) {//Faz a consulta por conta e agencia e retorna o historico de todas as transaçoes que a conta esteve envolvida
         ContaBancaria contaBancaria = contaBancariaRepository.findByContaAndAgencia(conta, agencia);
         contaBancaria.getHistoricoDestino().addAll(contaBancaria.getHistoricoOrigem());
        return contaBancaria.getHistoricoDestino();

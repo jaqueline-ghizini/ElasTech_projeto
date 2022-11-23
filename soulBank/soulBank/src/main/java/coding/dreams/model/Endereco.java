@@ -22,7 +22,7 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    @OneToMany(mappedBy="endereco", targetEntity=PessoaFisica.class)
+    @OneToMany(mappedBy="endereco", targetEntity=PessoaFisica.class)//Separamos o endereço em uma classe separada para que mais clientes possam utilizar o mesmo endereço
     @JsonIgnore
     private Collection pessoaFisica;
 

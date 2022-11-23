@@ -84,7 +84,7 @@ public class TransacaoService {
         return transacaoRepository.save(transacao);
     }
 
-    public Transacao realizarTransferencia(Transacao transacao) throws VerificacaoSistemaException {
+    public Transacao realizarTransferencia(Transacao transacao) throws VerificacaoSistemaException { // tratamento de erro ao verificar saldo de conta + limite e se conta envolvida na transaçao existe
         ContaBancaria contaOrigem = contaBancariaRepository.findByContaAndAgencia(transacao.getContaOrigem().getConta(), transacao.getContaOrigem().getAgencia());
         if(contaOrigem==null){
            throw new VerificacaoSistemaException("Conta Origem não encontrada");

@@ -18,9 +18,13 @@ public class Endereco {
     private String logradouro;
     private String complemento;
     private String bairro;
-    private String cidade;
-    private String estado;
+    private String localidade;
+    private String uf;
     private String cep;
+    private String ibge;
+    private String gia;
+    private String ddd;
+    private String siafi;
 
     @OneToMany(mappedBy="endereco", targetEntity=PessoaFisica.class)//Separamos o endereço em uma classe separada para que mais clientes possam utilizar o mesmo endereço
     @JsonIgnore
@@ -43,14 +47,18 @@ public class Endereco {
         return Objects.hash(idEndereco);
     }
 
-    public Endereco(Long idEndereco, String logradouro, String complemento, String bairro, String cidade, String estado, String cep,Collection pessoaFisica, Collection pessoaJuridica) {
+    public Endereco(Long idEndereco, String logradouro, String complemento, String bairro, String localidade, String uf, String cep,String ibge, String gia, String ddd, String siafi, Collection pessoaFisica, Collection pessoaJuridica) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.localidade = localidade;
+        this.uf = uf;
         this.cep = cep;
+        this.ibge = ibge;
+        this.gia = gia;
+        this.ddd = ddd;
+        this.siafi = siafi;
         this.pessoaFisica=pessoaFisica;
         this.pessoaJuridica= pessoaJuridica;
     }
@@ -90,20 +98,20 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCidade(String localidade) {
+        this.localidade = localidade;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getUf() {
+        return uf;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstado(String uf) {
+        this.uf = uf;
     }
 
     public String getCep() {
@@ -112,6 +120,38 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getIbge() {
+        return ibge;
+    }
+
+    public void setIbge(String ibge) {
+        this.ibge = ibge;
+    }
+
+    public String getGia() {
+        return gia;
+    }
+
+    public void setGia(String gia) {
+        this.gia = gia;
+    }
+
+    public String getDdd() {
+        return ddd;
+    }
+
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
+
+    public String getSiafi() {
+        return siafi;
+    }
+
+    public void setSiafi(String siafi) {
+        this.siafi = siafi;
     }
 
     public Collection getPessoaFisica() {
@@ -132,6 +172,6 @@ public class Endereco {
 
     @Override
 	public String toString() {
-		return this.logradouro + "," + this.complemento + "," + this.bairro + "," + this.cidade + "," + this.estado + "," + this.cep;
+		return this.logradouro + "," + this.complemento + "," + this.bairro + "," + this.localidade + "," + this.uf + "," + this.cep +"," + this.ibge + "," + this.gia + "," + this.ddd + "," + this.siafi;
     }
 }

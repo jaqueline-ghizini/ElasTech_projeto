@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class  SoulBankApplication {
 
+	//@SpringBootApplication
 	public static void main(String[] args) {
 
 		SpringApplication.run(SoulBankApplication.class, args);
